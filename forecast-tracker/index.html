@@ -1,1 +1,672 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>美股预测与跟进</title><style>*{box-sizing:border-box}body{margin:0;background:#f6f8fb;color:#172033;font:12px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}.top{background:#101b31;color:#fff;padding:17px max(24px,calc((100% - 1180px)/2))}.top h1{font-size:14px;margin:0}.top p{margin:3px 0 0;color:#b7c4da}.main{max-width:1180px;margin:auto;padding:22px 24px}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}.kpi,.card{background:#fff;border:1px solid #e4e8ef;border-radius:8px}.kpi{padding:12px}.kpi span{color:#718099}.kpi b{display:block;font-size:20px;margin-top:2px}.card{overflow:hidden;margin-bottom:16px}.card h2{font-size:14px;margin:0;padding:13px 16px;border-bottom:1px solid #e9edf3}.table-wrap{overflow:auto}table{border-collapse:collapse;width:max-content;min-width:100%}th,td{padding:9px 11px;text-align:left;border-bottom:1px solid #e9edf3;white-space:nowrap}th{background:#f8fafc;color:#526174}.check{position:sticky;left:0;background:#fff;z-index:1}.head-check{background:#f8fafc}.up{color:#138a56}.down{color:#c83e4a}.neutral{color:#a36a00}.tag{padding:2px 7px;border-radius:10px;font-size:11px}.active{color:#168255;background:#e9f7ef}.watch{color:#a66b00;background:#fff5df}.review{color:#b33d3d;background:#fdeeee}.notes{padding:0 16px}.note{padding:12px 0;border-bottom:1px solid #e9edf3}.note:last-child{border:0}.note b{display:block;font-size:14px}.note span{color:#718099}@media(max-width:650px){.main{padding:16px}.top{padding:16px}.kpis{grid-template-columns:repeat(2,1fr)}}</style><body><header class="top"><h1>美股预测与跟进</h1><p>关注清单 · 日内预估 · 验证复盘</p></header><main class="main"><section class="kpis"><div class="kpi"><span>活跃预测</span><b>12</b><small class="up">本周新增 3 条</small></div><div class="kpi"><span>已验证</span><b>28</b><small class="up">71% 命中率</small></div><div class="kpi"><span>待复盘</span><b>5</b><small class="neutral">本周处理</small></div><div class="kpi"><span>平均持有周期</span><b>24 天</b><small>最近 90 天</small></div></section><section class="card"><h2>预测清单</h2><div class="table-wrap"><table><thead><tr><th class="check head-check"><input type="checkbox" aria-label="全选"></th><th>标的</th><th>核心判断</th><th>方向</th><th>目标区间</th><th>截止日</th><th>状态</th></tr></thead><tbody><tr><td class="check"><input type="checkbox"></td><td><b>NVDA</b></td><td>数据中心需求保持强劲</td><td class="up">看多</td><td>$155–170</td><td>12/20</td><td><span class="tag active">跟进中</span></td></tr><tr><td class="check"><input type="checkbox"></td><td><b>MSFT</b></td><td>云业务增速维持韧性</td><td class="up">看多</td><td>$490–510</td><td>12/31</td><td><span class="tag active">跟进中</span></td></tr><tr><td class="check"><input type="checkbox"></td><td><b>TSLA</b></td><td>交付与利润率等待验证</td><td class="neutral">中性</td><td>$380–420</td><td>12/15</td><td><span class="tag watch">待观察</span></td></tr><tr><td class="check"><input type="checkbox"></td><td><b>XOM</b></td><td>油价回落压制盈利弹性</td><td class="down">看空</td><td>$98–105</td><td>12/10</td><td><span class="tag review">待复盘</span></td></tr></tbody></table></div></section><section class="card"><h2>本周验证重点</h2><div class="notes"><div class="note"><b>NVDA · 业绩前跟踪</b><span>观察订单、毛利率与下一季指引。</span></div><div class="note"><b>宏观 · 利率路径</b><span>等待数据对降息预期的再定价。</span></div><div class="note"><b>TSLA · 交付数据</b><span>确认销量与库存是否出现拐点。</span></div></div></section><p>预测内容仅用于研究记录，不构成投资建议。</p></main></body></html>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>美股关注清单｜每日跟踪</title>
+  <style>
+    :root { --ink:#1b2534; --muted:#6f7d90; --line:#e6ebf1; --bg:#f5f7fa; --card:#fff; --blue:#276ef1; --up:#07875f; --down:#c83a46; --warn:#d47715; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:12px/1.55 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; }
+    .shell { max-width:1440px; min-width:1040px; margin:auto; padding:22px 28px 40px; }
+    h1,h2,h3 { font-size:14px; line-height:1.35; margin:0; }
+    .top { display:flex; justify-content:space-between; align-items:flex-start; padding:3px 0 18px; }
+    .eyebrow { color:var(--blue); font-weight:650; letter-spacing:.05em; margin-bottom:4px; }
+    h1 { font-size:20px; letter-spacing:-.02em; }
+    .sub { margin:5px 0 0; color:var(--muted); }
+    .meta { text-align:right; color:var(--muted); padding-top:6px; }
+    .meta b { display:block; color:var(--ink); font-weight:600; }
+    .toolbar { display:flex; align-items:center; gap:18px; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; }
+    .toolbar label { color:var(--muted); }
+    select { margin-left:7px; border:1px solid #cdd6e1; border-radius:5px; padding:4px 24px 4px 8px; background:#fff; color:var(--ink); font:inherit; }
+    .refresh-btn { border:1px solid #b9cef8; border-radius:5px; padding:5px 9px; background:#f4f8ff; color:var(--blue); font:600 12px inherit; cursor:pointer; }.refresh-btn:hover { background:#e9f1ff; }.refresh-btn:disabled { cursor:wait; opacity:.65; }
+    .legend { margin-left:auto; display:flex; gap:14px; color:var(--muted); }
+    .dot { display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:5px; }
+    .category-outlook { margin-top:12px; padding:12px; border:1px solid var(--line); border-radius:10px; background:var(--card); box-shadow:0 1px 2px #17203308; }.outlook-head { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:9px; }.outlook-head h2 { font-size:14px; }.outlook-time { color:var(--muted); font-size:11px; }.outlook-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }.outlook-card { padding:10px 11px; border:1px solid var(--line); border-radius:7px; }.outlook-card.conservative { border-left:3px solid #087f5b; }.outlook-card.tech { border-left:3px solid #6654b8; }.outlook-label { display:flex; align-items:center; gap:6px; margin-bottom:5px; font-weight:650; }.outlook-signal { font-weight:650; }.outlook-card p { margin:4px 0 0; color:#526174; }.outlook-card strong { color:var(--ink); font-weight:650; }.outlook-card a { color:var(--blue); text-decoration:none; }.outlook-card a:hover { text-decoration:underline; }
+    .tabs { display:flex; gap:23px; border-bottom:1px solid var(--line); margin-top:17px; padding-left:4px; }
+    .tab { padding:10px 2px 9px; border:0; border-bottom:2px solid transparent; background:none; color:var(--muted); font:600 14px inherit; cursor:pointer; }
+    .tab.active { color:var(--blue); border-color:var(--blue); }
+    .panel { display:none; } .panel.active { display:block; }
+    .section-head { display:flex; justify-content:space-between; align-items:end; padding:17px 0 8px; }
+    .section-head p { margin:0; color:var(--muted); }
+    .table-card { overflow:auto; border:1px solid var(--line); border-radius:9px; background:var(--card); box-shadow:0 1px 2px #17203308; }
+    table { width:max-content; min-width:100%; border-collapse:separate; border-spacing:0; table-layout:auto; }
+    th,td { white-space:nowrap; text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); }
+    th { background:#f8fafc; color:#526174; font-weight:600; }.th-title { display:block; }.th-time,.th-date { display:block; margin-top:2px; color:#8a97a9; font-size:11px; font-weight:400; line-height:1.25; }.th-date { color:#657d9f; }
+    tr:last-child td { border-bottom:0; }
+    .asset-col,.asset { position:sticky; left:0; z-index:2; border-right:1px solid var(--line); }
+    .asset-col { z-index:4; background:#f8fafc; }
+    td.asset { background:#fff; font-weight:650; } .ticker { color:var(--muted); margin-left:5px; font-weight:400; }
+    .tag { display:inline-block; margin-left:7px; padding:1px 5px; border-radius:3px; font-size:11px; font-weight:600; }.tag-conservative { background:#e8f7ef; color:#087f5b; }.tag-tech { background:#f0edff; color:#6654b8; }
+    .num { font-variant-numeric:tabular-nums; font-weight:600; }.muted { color:var(--muted); font-weight:400; }.up { color:var(--up); }.down { color:var(--down); }.neutral { color:var(--warn); }.live-tag { display:inline-block; padding:2px 6px; border-radius:4px; font-variant-numeric:tabular-nums; font-weight:650; }.live-tag.live-up { color:#087f5b; background:#e8f7ef; }.live-tag.live-down { color:#b42332; background:#fff0f1; }.live-tag.live-neutral { color:#80531b; background:#fff7e8; }
+    .info { display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; margin-left:4px; border:1px solid #94a2b4; border-radius:50%; color:#738195; font:700 10px/1 sans-serif; cursor:help; position:relative; }
+    .comparison-title { display:flex; align-items:center; gap:4px; }.comparison-tag { display:inline-block; padding:1px 5px; border-radius:3px; color:#596d89; background:#eef3fb; font-size:10px; font-weight:600; line-height:1.35; }
+    .quote-title { display:flex; align-items:center; gap:5px; }.quote-switch { display:inline-flex; overflow:hidden; border:1px solid #cbd7e8; border-radius:4px; vertical-align:middle; }.quote-view-toggle { margin:0; padding:1px 5px; border:0; border-right:1px solid #cbd7e8; background:#fff; color:#64748b; font:600 10px/1.45 inherit; cursor:pointer; white-space:nowrap; }.quote-view-toggle:last-child { border-right:0; }.quote-view-toggle.active { background:#eaf2ff; color:var(--blue); }.quote-view-toggle:hover:not(.active) { background:#f5f8fc; }
+    .tooltip-pop { position:fixed; z-index:60; width:210px; padding:8px 9px; border-radius:6px; background:#172033; color:#fff; text-align:left; font:12px/1.45 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif; box-shadow:0 6px 18px #17203330; pointer-events:none; }
+    .details-row td { white-space:normal; background:#fbfcfe; padding:0; }.details { display:none; padding:12px 52px; color:#526174; border-bottom:1px solid var(--line); }.details.open { display:block; }.details b { color:var(--ink); }.toggle { border:0; padding:3px 0; background:none; color:var(--blue); font:inherit; cursor:pointer; }
+    .detail-tabs { display:flex; gap:18px; border-bottom:1px solid var(--line); }.detail-tab { padding:0 0 7px; border:0; border-bottom:2px solid transparent; color:var(--muted); background:none; font:600 12px inherit; cursor:pointer; }.detail-tab.active { color:var(--blue); border-color:var(--blue); }.detail-panel { display:none; min-height:35px; padding:9px 0 1px; line-height:1.6; }.detail-panel.active { display:block; }.detail-panel b { margin-right:4px; }.analysis-line { display:block; margin:2px 0; }.analysis-key { display:inline-block; width:98px; white-space:nowrap; color:#526174; font-weight:650; }.detail-panel a { color:var(--blue); text-decoration:none; }.detail-panel a:hover { text-decoration:underline; }
+    .empty { color:var(--muted); }.foot { margin:13px 0 0; color:var(--muted); font-size:11px; }.disclaimer { margin-top:15px; padding:10px 12px; border-radius:6px; background:#fff7e8; color:#80531b; }
+    .toast { position:fixed; z-index:50; top:16px; left:50%; transform:translate(-50%,-150%); min-width:280px; padding:11px 14px; border-radius:7px; color:#fff; box-shadow:0 8px 24px #17203333; transition:transform .35s ease; }.toast.show { transform:translate(-50%,0); }.toast.success{background:#07875f}.toast.warn{background:#d47715}.toast.error{background:#c83a46}
+  </style>
+</head>
+<body>
+  <div id="toast" class="toast success" role="status">页面已切换</div><div id="tooltip" class="tooltip-pop" hidden></div>
+  <main class="shell">
+    <header class="top"><div><div class="eyebrow">PERSONAL MARKET WATCH</div><h1>美股关注清单</h1><p class="sub">保守类与科技类 · 日内预估与复盘追踪</p></div><div class="meta">版本日期（中国北京时间）<b id="versionDate">2026-11-13</b>信息更新时间（中国北京时间）<b id="updatedAt">2026-11-14 01:26 · 已按六维框架重做预测</b></div></header>
+    <section class="toolbar"><label>查看日期（中国北京时间）<select id="datePicker"><option value="2026-11-13">2026-11-13</option><option value="2026-11-16">2026-11-16</option><option value="2026-11-17">2026-11-17</option><option value="2026-11-18">2026-11-18（今日）</option></select></label><button id="refreshQuotes" class="refresh-btn" type="button">刷新实时行情</button><span class="legend"><span><i class="dot" style="background:#07875f"></i>预估上涨</span><span><i class="dot" style="background:#c83a46"></i>预估下跌</span><span><i class="dot" style="background:#d47715"></i>待更新</span></span></section>
+    <section class="category-outlook" aria-labelledby="evening-outlook-title"><div class="outlook-head"><h2 id="evening-outlook-title">本版本盘中分类预测</h2><span id="outlookTime" class="outlook-time">中国北京时间 2026-11-14 01:26 更新 · 目标收盘：中国北京时间 2026-11-14 05:00（美股 2026-11-13 常规盘）</span></div><div class="outlook-grid"><article class="outlook-card conservative"><div class="outlook-label"><span class="tag tag-conservative">保守类</span><span id="conservativeSignal" class="outlook-signal up">主情景：上涨 +0.2%</span></div><p><strong>覆盖：</strong>AAPL、KO</p><p id="conservativeText"><strong>资金与业绩：</strong>AAPL 最新涨 0.86%；KO 最新涨 1.66%，且三季度收入增长 7%、上调全年指引。</p><p><strong>宏观与情绪：</strong>批发通胀偏高令市场整体谨慎，但防御消费相对受益，因此保守类仍偏强。<a href="https://www.coca-colacompany.com/media-center/coca-cola-reports-third-quarter-2026-results" target="_blank" rel="noopener">查看 KO 业绩</a></p></article><article class="outlook-card tech"><div class="outlook-label"><span class="tag tag-tech">科技类</span><span id="techSignal" class="outlook-signal down">主情景：下跌 -0.6%</span></div><p><strong>覆盖：</strong>VOO、QQQ、MU、NVDA、INTC、TSM、TSLA</p><p id="techText"><strong>行业与资金：</strong>英伟达 CEO 事件持续压低 AI 风险偏好；QQQ、MU、NVDA、INTC、TSM、TSLA 的最新可用行情均为下跌。</p><p><strong>宏观与情绪：</strong>批发通胀同比偏高，利率压力叠加科技卖盘，令本版本对应盘中科技类主情景转为下跌。<a href="https://apnews.com/article/f8edd0eeb1494d4d2584715686c5e619" target="_blank" rel="noopener">查看市场报道</a></p></article></div></section>
+    <nav class="tabs" aria-label="交易时段"><button class="tab active" data-tab="intraday">盘中</button><button class="tab" data-tab="afterhours">盘后</button><button class="tab" data-tab="premarket">盘前</button></nav>
+    <div id="intraday" class="panel active"></div><div id="afterhours" class="panel"></div><div id="premarket" class="panel"></div>
+    <p class="disclaimer">仅作个人信息整理，不构成投资建议。</p>
+  </main>
+  <script>
+    document.getElementById('updatedAt').textContent='2026-11-15 00:25 · 本次实际已回填';
+    const assets = [
+      ['苹果','AAPL','保守类'],['可口可乐','KO','保守类'],['Vanguard S&P 500 ETF','VOO','科技类'],['Invesco QQQ Trust','QQQ','科技类'],['美光科技','MU','科技类'],['英伟达','NVDA','科技类'],['英特尔','INTC','科技类'],['台积电 ADR','TSM','科技类'],['特斯拉','TSLA','科技类']
+    ];
+    const stages = {
+      intraday: { title:'盘中', subtitle:'本次预估将在北京时间 20:30 更新', fields:['上次实际','本次预估'] },
+      afterhours: { title:'盘后', subtitle:'本次预估将在北京时间 24:00 更新', fields:['上次实际','本次预估'] },
+      premarket: { title:'盘前', subtitle:'本次预估将在下个工作日 15:30 更新', fields:['上次实际','本次预估'] }
+    };
+    const fieldTimes = {
+      intraday: { '上次实际':'北京时间 2026-11-13 09:00 更新', '本次预估':'北京时间 2026-11-14 01:26 更新' },
+      afterhours: { '上次实际':'北京时间 2026-11-13 09:00 更新', '本次预估':'北京时间 2026-11-14 01:26 更新' },
+      premarket: { '上次实际':'北京时间 2026-11-13 20:30 更新', '本次预估':'北京时间 2026-11-14 01:26 更新' }
+    };
+    const fieldDates = {
+      intraday: { '上次实际':'目标收盘：北京时间 2026-11-13 05:00', '本次预估':'目标收盘：北京时间 2026-11-14 05:00' },
+      afterhours: { '上次实际':'目标收盘：北京时间 2026-11-13 09:00', '本次预估':'目标收盘：北京时间 2026-11-14 09:00' },
+      premarket: { '上次实际':'目标收盘：北京时间 2026-11-12 22:30', '本次预估':'目标收盘：北京时间 2026-11-13 22:30' }
+    };
+    const realtimeMeta = { date:'目标收盘：北京时间 2026-11-14 05:00', updated:'数据更新：北京时间 2026-11-14 01:02' };
+    const stageQuoteMeta = {
+      intraday:{ date:'目标收盘：北京时间 2026-11-14 05:00', realtimeUpdated:'数据更新：北京时间 2026-11-14 01:02', actualUpdated:'数据更新：北京时间 2026-11-15 00:25' },
+      afterhours:{ date:'目标收盘：北京时间 2026-11-14 09:00', realtimeUpdated:'数据更新：北京时间 2026-11-14 08:59', actualUpdated:'数据更新：北京时间 2026-11-14 08:59' },
+      premarket:{ date:'目标收盘：北京时间 2026-11-13 22:30', realtimeUpdated:'数据更新：北京时间 2026-11-13 20:30', actualUpdated:'数据更新：北京时间 2026-11-13 20:30' }
+    };
+    const futureTrendMeta = { date:'目标收盘：北京时间 2026-11-17 05:00', updated:'1 周后目标收盘：北京时间 2026-11-21 05:00' };
+    const descriptions = {
+      '上次实际':'实际价格变动及比例；盘中、盘后会在对应复盘时更新。',
+      '本次预估':'本版本对应盘中收盘的预估升降价格、比例及支撑该判断的新闻分析。',
+      '本次实际':'本版本对应目标收盘的实际价格与涨跌；收盘后回填。',
+      '预估与实际差异':'本次实际已回填时展示其与本次预估的差异；否则展示实时涨跌与本次预估的差异。',
+      '未来走势':'优先相对本次实际价格的单点预估；本次实际未回填时相对当前实时价格，展示下一交易日及一周后的目标收盘走势。'
+    };
+    const sources = {
+      market:['AP 11/12 市场回顾','https://apnews.com/article/3f3668a937a11535103e3a5c8d82c9fc'],
+      nvidia:['Axios：英伟达盘前波动','https://www.axios.com/2026/11/12/nvidia-stocks-tech-huang'],
+      after:['盘后行情快照（11/12 19:59 ET）','https://www.stockstobuynow.ai/after-hours-stock-heatmap/'],
+      qqqAfter:['盘后市场报道（11/12 18:00 ET）','https://www.stocktitan.net/articles/stock-market-today-live-november-12-2026'],
+      tsm:['Le Monde：台积电与 AI 供应链','https://www.lemonde.fr/en/economy/article/2026/11/12/in-taiwan-ai-related-stocks-send-investors-into-a-frenzy_6778973_19.html'],
+      premarket:['Investing.com：11/12 盘前报价','https://ng.investing.com/equities/pre-market'],
+      premarketHeatmap:['StocksToBuyNow：11/12 盘前热力图','https://www.stockstobuynow.ai/premarket-stock-heatmap/'],
+      vooPremarket:['ChartExchange：VOO 11/12 盘前报价','https://chartexchange.com/symbol/nyse-voo/historical'],
+      tsmPremarket:['Public：TSM 11/12 盘前报价','https://public.com/stocks/tsm/pre-market']
+      ,fridayBrief:['DayTradingPrep：2026-11-13 美股盘前简报','https://daytradingprep.com/morning-brief-2026-11-13/']
+      ,fridayMacro:['NextFin：2026-11-13 美股盘前报告','https://nextfin.ai/en/news/us-stock-pre-market-report-november-13-2026-cef5ee7a03']
+      ,fridayKO:['Public：KO 2026-11-13 盘前报价','https://prod-app.271494016007.hellopublic.com/stocks/ko/pre-market']
+      ,fridayVOO:['Stocknear：VOO 2026-11-13 盘前报价','https://www.stocknear.com/etf/VOO/options/expected-move']
+      ,fridayMU:['Benzinga：美光 2026-11-13 盘前报道','https://www.benzinga.com/markets/tech/26/11/63235454/what-is-going-on-with-micron-stock-on-friday']
+      ,fridayTSM:['ChartMill：TSM 2026-11-13 盘前报价','https://www.chartmill.com/stock/quote/TSM/news']
+      ,ppi:['AP：2026-11-13 美国批发通胀报告','https://apnews.com/article/5f427443fd31a4aa2bd2a1b6cebfe549']
+      ,nvidiaEvent:['AP：英伟达 CEO 事件与市场波动','https://apnews.com/article/f8edd0eeb1494d4d2584715686c5e619']
+      ,koResults:['可口可乐：2026 年第三季度业绩与全年指引','https://www.coca-colacompany.com/media-center/coca-cola-reports-third-quarter-2026-results']
+      ,nov13Close:['Yahoo Finance：2026-11-13 常规盘收盘行情','https://finance.yahoo.com/quote/AAPL/history/']
+      ,nov13After:['Yahoo Finance：2026-11-13 盘后行情快照','https://finance.yahoo.com/quote/QQQ/history/']
+      ,weekendNvidia:['Axios：美财政部长质疑英伟达对华销售与治理','https://www.axios.com/2026/11/15/bessent-nvidia-earnings-china-chip-sales-ceo']
+      ,weekAhead:['Kiplinger：11/16 当周经济日历与英伟达财报窗口','https://www.kiplinger.com/investing/economy/this-weeks-economic-calendar']
+      ,nov16Close:['Yahoo Finance：2026-11-16 常规盘收盘行情','https://finance.yahoo.com/quote/NVDA/history/']
+      ,nov16After:['Public：2026-11-16 盘后时段快照','https://public.com/stocks/nvda/after-hours']
+      ,nov16Premarket:['Public：2026-11-16 盘前时段快照','https://public.com/stocks/nvda/pre-market']
+      ,nov17Catalysts:['Kiplinger：本周零售销售、联储纪要与英伟达财报窗口','https://www.kiplinger.com/investing/economy/this-weeks-economic-calendar']
+      ,nov17Close:['Yahoo Finance：2026-11-17 常规盘收盘行情','https://finance.yahoo.com/quote/NVDA/history/']
+      ,nov17After:['Yahoo Finance：2026-11-17 盘后行情快照','https://finance.yahoo.com/quote/NVDA/']
+      ,nvdaQ3:['英伟达：2027 财年第三季度业绩','https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Third-Quarter-Fiscal-2027/default.aspx']
+      ,nov17Macro:['美国财政部：2026-11-17 国债收益率曲线','https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve']
+      ,nov18Close:['Yahoo Finance 等：2026-11-18 常规盘收盘行情','https://finance.yahoo.com/quote/NVDA/history/']
+      ,nov18After:['Yahoo Finance 等：2026-11-18 盘后时段快照','https://finance.yahoo.com/quote/QQQ/history/']
+    };
+    function analysis(event, mechanism, impact, source) { const [label,url]=sources[source]; return `<span class="analysis-line"><span class="analysis-key">具体新闻</span>${event}</span><span class="analysis-line"><span class="analysis-key">影响机制</span>${mechanism}</span><span class="analysis-line"><span class="analysis-key">对应幅度</span>${impact}</span><span class="analysis-line"><span class="analysis-key">来源</span><a href="${url}" target="_blank" rel="noopener">${label}</a></span>`; }
+    function factorAnalysis(factors, impact, source) { const [label,url]=sources[source]; return factors.map(([name,text])=>`<span class="analysis-line"><span class="analysis-key">${name}</span>${text}</span>`).join('')+`<span class="analysis-line"><span class="analysis-key">来源</span><a href="${url}" target="_blank" rel="noopener">${label}</a></span>`; }
+    const marketData = {
+      AAPL:{close:'354.88', forecastPrice:'354.48 ~ 355.68', actual:['-0.74','-0.21%'], reason:analysis('AP 报道 11/12 美股在英伟达剧烈波动后小幅收低；该报道未列出苹果当日新的公司公告。','缺少苹果独立催化剂时，AAPL 主要随大型科技风险偏好回落。','AAPL 收于 354.88 美元，跌 0.74 美元（-0.21%），跌幅低于高波动芯片股。','market'), after:{close:'354.77',actual:['-0.11','-0.03%'],reason:analysis('盘后快照显示 AAPL 在 19:59 ET 为 354.77 美元；核验来源未披露苹果盘后新增公司新闻。','没有新事件、盘后流动性较低，价格围绕常规盘收盘小幅波动。','较常规盘收盘低 0.11 美元（-0.03%），属于极低幅度变动。','after')}, forecast:['-0.4 ~ +0.8','-0.1% ~ +0.2%'], forecastReason:'新闻基线为大型科技风险偏好仍受英伟达波动影响；若期货企稳，AAPL 的低 beta 特征使其更可能窄幅震荡。'},
+      KO:{close:'97.44', forecastPrice:'97.24 ~ 97.64', actual:['-0.15','-0.15%'], reason:analysis('AP 的 11/12 市场回顾未披露可口可乐当日新的公司公告，市场主要受科技股与油价波动驱动。','没有公司级利空时，KO 受整体风险偏好传导有限，防御属性减弱了下行冲击。','KO 收于 97.44 美元，跌 0.15 美元（-0.15%），幅度小于大盘的日内波动。','market'), forecast:['-0.2 ~ +0.2','-0.2% ~ +0.2%'], forecastReason:'目前没有已核验的 KO 新公司新闻；预估以防御板块资金流和大盘风险偏好为主要变量，故给出窄幅区间。'},
+      VOO:{close:'696.00', forecastPrice:'694.60 ~ 698.10', actual:['-2.34','-0.34%'], reason:analysis('AP 报道 S&P 500 开盘一度跌近 1%，收盘跌幅收窄；市场吸收了英伟达与油价的大幅波动。','VOO 跟踪 S&P 500，英伟达等权重科技股下跌拖累指数，能源板块表现改善部分抵消影响。','VOO 收于 696.00 美元，跌 2.34 美元（-0.34%），与大盘小幅收低一致。','market'), forecast:['-1.4 ~ +2.1','-0.2% ~ +0.3%'], forecastReason:'已知催化剂是英伟达驱动的科技风险偏好变化；若芯片板块止跌，能源等非科技权重可帮助 VOO 收窄波动。'},
+      QQQ:{close:'688.17', forecastPrice:'686.07 ~ 691.57', actual:['-2.19','-0.32%'], reason:analysis('市场回顾显示英伟达下跌是纳指压力核心，盘中其他科技股的反弹令跌幅有所收窄。','QQQ 的科技权重较高，AI 龙头下跌会直接压低 ETF；其他大型科技股反弹限制了下跌。','QQQ 收于 688.17 美元，跌 2.19 美元（-0.32%）。','market'), after:{close:'689.27',actual:['+1.10','+0.16%'],reason:analysis('盘后市场报道记录 QQQ 在 18:00 ET 较收盘上涨 0.16%。','盘后对科技板块的卖压暂时缓和，ETF 出现小幅修复；该时段成交量较常规盘低。','盘后价 689.27 美元，较常规盘高 1.10 美元（+0.16%）。','qqqAfter')}, forecast:['-2.1 ~ +3.4','-0.3% ~ +0.5%'], forecastReason:'盘后 QQQ 已出现 +0.16% 的修复，但英伟达相关风险尚未消失；下一时段将主要取决于半导体是否延续止跌。'},
+      MU:{close:'798.44', forecastPrice:'786.44 ~ 818.44', actual:['-12.45','-1.53%'], reason:analysis('英伟达大幅下跌使市场重新定价 AI 资本开支与高估值芯片链，美光所在的存储链同步承压。','美光的 AI 存储需求预期与数据中心资本开支高度相关，AI 风险偏好下降会放大其波动。','MU 收于 798.44 美元，跌 12.45 美元（-1.53%）。','nvidia'), after:{close:'815.13',actual:['+16.69','+2.09%'],reason:analysis('盘后快照显示 MU 上涨 2.09%。','芯片股盘后回补常规盘跌幅，表明短线对 AI 链的抛压有所缓解；这不是公司业绩公告带来的单独催化。','盘后价 815.13 美元，较常规盘高 16.69 美元（+2.09%）。','after')}, forecast:['-12.0 ~ +20.0','-1.5% ~ +2.5%'], forecastReason:'新闻基线是 AI 龙头引发的芯片估值重估，而盘后 MU 已反弹 2.09%；若反弹延续可偏上沿，若 AI 风险偏好再转弱则偏下沿。'},
+      NVDA:{close:'166.19', forecastPrice:'161.19 ~ 174.49', actual:['-7.63','-4.39%'], reason:analysis('Axios 报道，围绕英伟达 CEO 的治理担忧令其盘前一度跌超 11.5%，早盘仍显著走弱。','事件直接提高公司治理不确定性，资金降低对 AI 龙头的风险敞口；英伟达权重大，连带压制科技指数。','NVDA 收于 166.19 美元，跌 7.63 美元（-4.39%）；盘前极端跌幅在常规盘部分修复。','nvidia'), after:{close:'167.82',actual:['+1.63','+0.98%'],reason:analysis('盘后快照显示 NVDA 上涨 0.98%，未显示新的官方公司公告。','常规盘大跌后出现技术性回补，但治理新闻带来的不确定性仍在，盘后反弹不能等同于事件消除。','盘后价 167.82 美元，较常规盘高 1.63 美元（+0.98%）。','after')}, forecast:['-5.0 ~ +8.3','-3.0% ~ +5.0%'], forecastReason:'核心新闻仍是 CEO 治理担忧；盘后 +0.98% 仅说明卖压暂缓。若缺乏进一步澄清，波动区间仍应维持较宽。'},
+      INTC:{close:'61.20', forecastPrice:'60.00 ~ 63.00', actual:['-1.28','-2.05%'], reason:analysis('英伟达事件带动 AI 芯片板块风险偏好下降，市场回顾显示芯片与科技股随之承压。','虽然事件不直接涉及英特尔，但半导体估值通常受行业资金流共同影响，卖压外溢至 INTC。','INTC 收于 61.20 美元，跌 1.28 美元（-2.05%）。','nvidia'), after:{close:'62.04',actual:['+0.84','+1.37%'],reason:analysis('盘后快照显示 INTC 上涨 1.37%。','芯片板块盘后反弹带来行业 beta 修复，未见英特尔独立公司新闻驱动。','盘后价 62.04 美元，较常规盘高 0.84 美元（+1.37%）。','after')}, forecast:['-1.2 ~ +1.8','-2.0% ~ +3.0%'], forecastReason:'INTC 的短线主变量仍是半导体板块能否延续盘后修复；因没有独立公司催化，预估主要跟随行业风险偏好。'},
+      TSM:{close:'405.49', forecastPrice:'399.39 ~ 415.59', actual:['-7.80','-1.89%'], reason:analysis('Le Monde 当日报道台积电是英伟达等 AI 芯片的关键代工环节；同日英伟达的剧烈波动冲击 AI 链估值。','TSM ADR 对 AI 订单和资本开支预期敏感，英伟达风险事件使供应链估值一起下调。','TSM 收于 405.49 美元，跌 7.80 美元（-1.89%）。','tsm'), forecast:['-6.1 ~ +10.1','-1.5% ~ +2.5%'], forecastReason:'台积电的短线风险来自英伟达事件对 AI 需求预期的传导；若芯片龙头企稳，供应链估值有修复空间。'},
+      TSLA:{close:'397.45', forecastPrice:'393.45 ~ 405.45', actual:['+6.59','+1.69%'], reason:analysis('市场回顾指出特斯拉对指数贡献了约 17 点，成为抵消英伟达拖累的正向力量之一。','TSLA 的上涨给高权重成长股提供支撑，部分中和了 AI 龙头下跌对纳指的冲击。','TSLA 收于 397.45 美元，涨 6.59 美元（+1.69%）。','market'), after:{close:'399.83',actual:['+2.38','+0.60%'],reason:analysis('盘后快照显示 TSLA 继续上涨 0.60%，来源未披露对应的新增公司公告。','常规盘的正向动能在盘后延续，但缺乏新增新闻催化，需把该变化视为低流动性时段的价格信号。','盘后价 399.83 美元，较常规盘高 2.38 美元（+0.60%）。','after')}, forecast:['-4.0 ~ +8.0','-1.0% ~ +2.0%'], forecastReason:'常规盘和盘后均保持上涨，但没有已核验的新公司新闻；下一时段仍主要受成长股风险偏好与公司消息共同驱动。'}
+    };
+    /* 单点主情景：页面不再展示正负混合区间。 */
+    Object.assign(marketData.AAPL,{forecastPrice:'355.40',forecast:['+0.52','+0.15%']});
+    Object.assign(marketData.KO,{forecastPrice:'97.55',forecast:['+0.11','+0.11%']});
+    Object.assign(marketData.VOO,{forecastPrice:'697.05',forecast:['+1.05','+0.15%']});
+    Object.assign(marketData.QQQ,{forecastPrice:'690.23',forecast:['+2.06','+0.30%']});
+    Object.assign(marketData.MU,{forecastPrice:'806.42',forecast:['+7.98','+1.00%']});
+    Object.assign(marketData.NVDA,{forecastPrice:'170.34',forecast:['+4.15','+2.50%']});
+    Object.assign(marketData.INTC,{forecastPrice:'62.12',forecast:['+0.92','+1.50%']});
+    Object.assign(marketData.TSM,{forecastPrice:'412.58',forecast:['+7.09','+1.75%']});
+    Object.assign(marketData.TSLA,{forecastPrice:'403.41',forecast:['+5.96','+1.50%']});
+    const premarketData = {
+      AAPL:{close:'356.77',actual:['+1.14','+0.32%'],reason:analysis('11/12 盘前报价显示 AAPL 上涨 0.32%。','英伟达事件导致芯片股承压，但苹果在该盘前时段相对独立，出现小幅正向波动。','盘前价 356.77 美元，较前收高 1.14 美元（+0.32%）。','premarket')},
+      KO:{close:'97.91',actual:['+0.34','+0.34%'],reason:analysis('11/12 盘前报价显示 KO 上涨 0.34%。','消费防御板块在科技股风险事件期间相对稳定，早盘资金偏好令其小幅上行。','盘前价 97.91 美元，较前收高 0.34 美元（+0.34%）。','premarketHeatmap')},
+      VOO:{close:'693.12',actual:['-5.23','-0.75%'],reason:analysis('11/12 09:29:59 ET 的 VOO 盘前报价为 693.12 美元。','盘前大盘风险偏好下降，AI 龙头与半导体压力传导至 S&P 500 跟踪 ETF。','较前收低 5.23 美元（-0.75%），反映开盘前的系统性避险。','vooPremarket')},
+      QQQ:{close:'682.00',actual:['-8.38','-1.21%'],reason:analysis('11/12 盘前报价显示 QQQ 下跌 1.21%。','英伟达与芯片板块的显著下跌通过科技权重直接压低纳指 100 ETF。','盘前价 682.00 美元，较前收低 8.38 美元（-1.21%）。','premarket')},
+      MU:{close:'775.99',actual:['-35.31','-4.35%'],reason:analysis('11/12 盘前报价显示 MU 下跌 4.35%。','AI 龙头的治理不确定性触发芯片链估值下调，存储股对资本开支预期的敏感度放大跌幅。','盘前价 775.99 美元，较前收低 35.31 美元（-4.35%）。','premarket')},
+      NVDA:{close:'158.99',actual:['-14.74','-8.48%'],reason:analysis('11/12 盘前报价显示 NVDA 下跌 8.48%；相关报道指向 CEO 治理担忧。','事件直接提高公司治理不确定性，盘前资金迅速降低 AI 龙头风险敞口。','盘前价 158.99 美元，较前收低 14.74 美元（-8.48%）。','premarket')},
+      INTC:{close:'60.63',actual:['-1.87','-2.99%'],reason:analysis('11/12 盘前报价显示 INTC 下跌 2.99%。','英伟达事件没有直接涉及英特尔，但半导体板块资金流同步转向，造成行业 beta 下跌。','盘前价 60.63 美元，较前收低 1.87 美元（-2.99%）。','premarket')},
+      TSM:{close:'394.43',actual:['-18.92','-4.58%'],reason:analysis('11/12 09:30 ET 的 TSM 盘前报价为 394.43 美元。','作为 AI 芯片关键代工环节，台积电 ADR 受到英伟达事件与供应链估值下调的共同影响。','较前收低 18.92 美元（-4.58%），为盘前显著下跌。','tsmPremarket')},
+      TSLA:{close:'385.92',actual:['-4.92','-1.26%'],reason:analysis('11/12 盘前报价显示 TSLA 下跌 1.26%。','盘前成长股整体风险偏好下降，特斯拉在无新增独立催化的情况下随高 beta 板块走弱。','盘前价 385.92 美元，较前收低 4.92 美元（-1.26%）。','premarket')}
+    };
+    /* 周五 20:30（北京时间）复盘：仅采用可追溯的盘前独立快照，不以常规盘替代。 */
+    const fridayPremarketData = {
+      AAPL:{close:'356.51',actual:['+1.63','+0.46%'],reason:analysis('DayTradingPrep 07:47 ET 报价为 AAPL 356.51 美元；盘前指数期货偏稳。','期货小幅走强降低了大盘拖累，苹果未出现单独的重大利空，价格随大型科技风险偏好温和回升。','相对前收 354.88 美元高 1.63 美元（+0.46%）。','fridayBrief')},
+      KO:{close:'97.86',actual:['+0.42','+0.43%'],reason:analysis('Public 的 KO 盘前页面在 04:30 ET 显示 97.86 美元、上涨 0.43%。','防御消费股受科技波动传导较弱；期货转稳时，低波动属性使 KO 获得小幅买盘。','相对前收 97.44 美元高 0.42 美元（+0.43%）。','fridayKO')},
+      VOO:{close:'697.94',actual:['+1.94','+0.27%'],reason:analysis('Stocknear 在 07:22 ET 的 VOO 盘前报价为 697.94 美元。','标普期货温和上涨，指数 ETF 直接反映开盘前的整体风险偏好改善。','相对前收 696.00 美元高 1.94 美元（+0.27%）。','fridayVOO')},
+      QQQ:{close:'688.11',actual:['-0.06','-0.01%'],reason:analysis('DayTradingPrep 07:47 ET 报价为 QQQ 688.11 美元，接近前收。','纳指期货虽小幅走高，但半导体波动使科技 ETF 的盘前方向基本持平。','相对前收 688.17 美元低 0.06 美元（-0.01%）。','fridayBrief')},
+      MU:{close:'792.76',actual:['-5.68','-0.71%'],reason:analysis('Benzinga 报道美光盘前约 792.76 美元、下跌 0.71%，市场继续重估 AI 硬件链。','AI 资本开支预期的不确定性提高了存储股的估值折价，MU 的跌幅大于大盘。','相对前收 798.44 美元低 5.68 美元（-0.71%）。','fridayMU')},
+      NVDA:{close:'168.10',actual:['+1.91','+1.15%'],reason:analysis('DayTradingPrep 07:47 ET 报价为 NVDA 168.10 美元；盘前科技情绪出现修复。','此前治理担忧引发的抛售后，期货企稳带来技术性回补，但并不代表相关不确定性已消除。','相对前收 166.19 美元高 1.91 美元（+1.15%）。','fridayBrief')},
+      INTC:{close:'60.84',actual:['-0.36','-0.59%'],reason:analysis('DayTradingPrep 07:47 ET 报价为 INTC 60.84 美元。','半导体板块仍存在分化，英特尔没有已核验的独立新催化，行业 beta 令其小幅承压。','相对前收 61.20 美元低 0.36 美元（-0.59%）。','fridayBrief')},
+      TSM:{close:'410.05',actual:['+4.56','+1.12%'],reason:analysis('ChartMill 07:10 ET 的 TSM 盘前报价为 410.05 美元、上涨 1.12%。','AI 链风险偏好改善时，台积电作为关键代工环节受益于供应链估值修复。','相对前收 405.49 美元高 4.56 美元（+1.12%）。','fridayTSM')},
+      TSLA:{close:'400.26',actual:['+2.81','+0.71%'],reason:analysis('DayTradingPrep 07:47 ET 报价为 TSLA 400.26 美元。','成长股期货企稳叠加特斯拉前一日相对强势，推动盘前延续温和上行。','相对前收 397.45 美元高 2.81 美元（+0.71%）。','fridayBrief')}
+    };
+    const priorForecasts = {
+      premarket: Object.fromEntries(Object.entries(marketData).map(([ticker,d])=>[ticker,{price:d.forecastPrice,move:d.forecast[0],pct:d.forecast[1],reason:analysis('周五 15:30 定时任务以前收、指数期货与公开盘前新闻为基线给出单一主情景。','主情景明确给出方向和目标价；实际结果会据此计算差额，而不是和宽幅区间比较。',`预估价 ${d.forecastPrice} 美元；预估变动 ${d.forecast[0]} 美元（${d.forecast[1]}）。`,'fridayMacro')}]))
+    };
+    const premarketDiff = {
+      AAPL:{text:'高于预估上沿 +0.83 美元（+0.23%）',reason:analysis('实际盘前价 356.51 美元高于 15:30 预估上沿 355.68 美元。','指数期货企稳和大型科技回补强于预估基线，令 AAPL 突破窄幅区间。','偏离上沿 0.83 美元（+0.23%）。','fridayBrief')},
+      KO:{text:'高于预估上沿 +0.22 美元（+0.23%）',reason:analysis('实际盘前价 97.86 美元高于预估上沿 97.64 美元。','防御股在市场转稳时的买盘略强于原先的窄幅假设。','偏离上沿 0.22 美元（+0.23%）。','fridayKO')}
+    };
+    const nextForecasts = {
+      intraday: {
+        AAPL:{price:'355.0 ~ 360.0',move:'-1.5 ~ +3.5',pct:'-0.4% ~ +1.0%'}, KO:{price:'97.4 ~ 98.4',move:'-0.5 ~ +0.5',pct:'-0.5% ~ +0.5%'}, VOO:{price:'694.0 ~ 701.0',move:'-2.0 ~ +5.0',pct:'-0.3% ~ +0.7%'}, QQQ:{price:'681.0 ~ 692.0',move:'-7.0 ~ +4.0',pct:'-1.0% ~ +0.6%'}, MU:{price:'776.0 ~ 807.0',move:'-22.0 ~ +9.0',pct:'-2.8% ~ +1.1%'}, NVDA:{price:'160.0 ~ 173.0',move:'-6.2 ~ +6.8',pct:'-3.7% ~ +4.1%'}, INTC:{price:'59.4 ~ 62.0',move:'-1.8 ~ +0.8',pct:'-2.9% ~ +1.3%'}, TSM:{price:'404.0 ~ 414.0',move:'-1.5 ~ +8.5',pct:'-0.4% ~ +2.1%'}, TSLA:{price:'393.0 ~ 404.0',move:'-4.5 ~ +6.5',pct:'-1.1% ~ +1.6%'}
+      },
+      afterhours: {
+        AAPL:{price:'355.0 ~ 361.0',move:'-3.0 ~ +3.0',pct:'-0.8% ~ +0.8%'}, KO:{price:'97.2 ~ 98.3',move:'-0.6 ~ +0.5',pct:'-0.6% ~ +0.5%'}, VOO:{price:'692.0 ~ 701.0',move:'-4.0 ~ +5.0',pct:'-0.6% ~ +0.7%'}, QQQ:{price:'678.0 ~ 692.0',move:'-10.0 ~ +4.0',pct:'-1.5% ~ +0.6%'}, MU:{price:'772.0 ~ 807.0',move:'-26.0 ~ +9.0',pct:'-3.3% ~ +1.1%'}, NVDA:{price:'158.0 ~ 174.0',move:'-8.2 ~ +7.8',pct:'-4.9% ~ +4.7%'}, INTC:{price:'58.8 ~ 62.1',move:'-2.4 ~ +0.9',pct:'-3.9% ~ +1.5%'}, TSM:{price:'400.0 ~ 415.0',move:'-5.5 ~ +9.5',pct:'-1.4% ~ +2.3%'}, TSLA:{price:'390.0 ~ 405.0',move:'-7.5 ~ +7.5',pct:'-1.9% ~ +1.9%'}
+      }
+    };
+    Object.assign(nextForecasts.intraday,{
+      AAPL:{price:'358.00',move:'+3.12',pct:'+0.88%'},KO:{price:'97.80',move:'+0.36',pct:'+0.37%'},VOO:{price:'698.50',move:'+2.50',pct:'+0.36%'},QQQ:{price:'689.80',move:'+1.63',pct:'+0.24%'},MU:{price:'790.00',move:'-8.44',pct:'-1.06%'},NVDA:{price:'169.50',move:'+3.31',pct:'+1.99%'},INTC:{price:'60.60',move:'-0.60',pct:'-0.98%'},TSM:{price:'411.00',move:'+5.51',pct:'+1.36%'},TSLA:{price:'401.50',move:'+4.05',pct:'+1.02%'}
+    });
+    Object.assign(nextForecasts.afterhours,{
+      AAPL:{price:'357.00',move:'+2.12',pct:'+0.60%'},KO:{price:'97.70',move:'+0.26',pct:'+0.27%'},VOO:{price:'698.00',move:'+2.00',pct:'+0.29%'},QQQ:{price:'689.20',move:'+1.03',pct:'+0.15%'},MU:{price:'788.00',move:'-10.44',pct:'-1.31%'},NVDA:{price:'168.50',move:'+2.31',pct:'+1.39%'},INTC:{price:'60.30',move:'-0.90',pct:'-1.47%'},TSM:{price:'410.00',move:'+4.51',pct:'+1.11%'},TSLA:{price:'400.50',move:'+3.05',pct:'+0.77%'}
+    });
+    const realtimeData = {
+      AAPL:{price:'357.92',pct:'+0.86%',updated:'北京时间 2026-11-14 01:02:51'}, KO:{price:'99.055',pct:'+1.66%',updated:'北京时间 2026-11-14 01:02:49'}, VOO:{price:'689.53',pct:'-0.93%',updated:'北京时间 2026-11-14 01:02:51'}, QQQ:{price:'675.09',pct:'-1.90%',updated:'北京时间 2026-11-14 01:02:52'}, MU:{price:'759.15',pct:'-4.92%',updated:'北京时间 2026-11-14 01:02:53'}, NVDA:{price:'160.285',pct:'-3.55%',updated:'北京时间 2026-11-14 01:02:24'}, INTC:{price:'58.33',pct:'-4.69%',updated:'北京时间 2026-11-14 01:02:50'}, TSM:{price:'394.50',pct:'-2.71%',updated:'北京时间 2026-11-14 01:02:47'}, TSLA:{price:'390.12',pct:'-1.84%',updated:'北京时间 2026-11-14 01:02:50'}
+    };
+    /* 已按目标收盘（北京时间 2026-11-14 05:00）回填；金额、比例均相对上一收盘。 */
+    const currentActuals = {
+      AAPL:{price:'356.27',move:'+1.39',pct:'+0.39%'}, KO:{price:'99.26',move:'+1.82',pct:'+1.87%'},
+      VOO:{price:'693.34',move:'-2.66',pct:'-0.38%'}, QQQ:{price:'679.89',move:'-8.28',pct:'-1.20%'},
+      MU:{price:'778.31',move:'-20.13',pct:'-2.52%'}, NVDA:{price:'162.85',move:'-3.34',pct:'-2.01%'},
+      INTC:{price:'59.66',move:'-1.54',pct:'-2.52%'}, TSM:{price:'398.87',move:'-6.62',pct:'-1.63%'}, TSLA:{price:'390.22',move:'-7.23',pct:'-1.82%'}
+    };
+    const premarketCurrent = Object.fromEntries(Object.entries(fridayPremarketData).map(([ticker,data])=>[ticker,{price:data.close,move:data.actual[0],pct:data.actual[1]}]));
+    // 盘后报价以同日常规盘收盘价为基准；美东 19:59 左右快照 = 北京时间 2026-11-14 08:59 左右。
+    const afterhoursActuals = {
+      AAPL:{price:'355.38',move:'-0.89',pct:'-0.25%'}, KO:{price:'99.50',move:'+0.25',pct:'+0.25%'},
+      VOO:{price:'689.01',move:'-4.37',pct:'-0.63%'}, QQQ:{price:'674.26',move:'-5.63',pct:'-0.83%'},
+      MU:{price:'761.20',move:'-17.11',pct:'-2.20%'}, NVDA:{price:'161.01',move:'-1.84',pct:'-1.13%'},
+      INTC:{price:'58.65',move:'-1.01',pct:'-1.69%'}, TSM:{price:'394.50',move:'-4.23',pct:'-1.06%'},
+      TSLA:{price:'387.11',move:'-3.11',pct:'-0.80%'}
+    };
+    const stageActuals = { intraday:currentActuals, afterhours:afterhoursActuals, premarket:premarketCurrent };
+    const stageRealtimeData = { intraday:realtimeData, afterhours:afterhoursActuals, premarket:premarketCurrent };
+    const intradaySignals = {
+      AAPL:'美债收益率上行（极高权重、偏空）与 VIX 约 20.68、日内约 +10.59%（极高权重、风险升温）限制科技估值；苹果相对低波动，仍有防御性买盘。',
+      KO:'美债收益率上行与 VIX 走高压制整体风险偏好；但 KO 的防御属性和业绩支撑使其相对抗跌。',
+      VOO:'美债收益率上行（极高权重）+ VIX 走高（极高权重）构成风险资产的双重偏空信号；成交量和市场广度暂无可交叉验证的同刻数据，不作确定性判断。',
+      QQQ:'美债收益率上行、VIX 走高均偏空，且科技龙头同步偏弱（高权重），对高估值科技 ETF 的压力更直接；成交量与市场广度暂无可交叉验证的同刻数据。',
+      MU:'美债收益率上行、VIX 走高与半导体龙头弱势同时出现，形成高权重偏空组合；成交量与市场广度暂无可交叉验证的同刻数据。',
+      NVDA:'美债收益率上行、VIX 走高与公司治理不确定性同时存在；作为科技龙头自身走弱，会放大半导体风险偏好压力。',
+      INTC:'美债收益率上行、VIX 走高与半导体板块同步走弱，均指向行业 beta 承压；成交量与市场广度暂无可交叉验证的同刻数据。',
+      TSM:'美债收益率上行、VIX 走高和 AI 龙头弱势，会通过供应链估值传导压制 TSM；成交量与市场广度暂无可交叉验证的同刻数据。',
+      TSLA:'美债收益率上行和 VIX 走高会压制高 beta 成长股估值；科技龙头同步走弱使特斯拉的风险偏好环境转差。'
+    };
+    /* 保存未来目标价；展示比例优先相对本次实际，未回填时相对当前实时价格。 */
+    const futureTrends = {
+      AAPL:{nextPrice:358.99,weekPrice:360.78}, KO:{nextPrice:99.20,weekPrice:99.65}, VOO:{nextPrice:692.29,weekPrice:694.36}, QQQ:{nextPrice:679.14,weekPrice:683.19}, MU:{nextPrice:768.26,weekPrice:778.13}, NVDA:{nextPrice:161.89,weekPrice:163.17}, INTC:{nextPrice:58.74,weekPrice:59.03}, TSM:{nextPrice:397.66,weekPrice:400.81}, TSLA:{nextPrice:391.68,weekPrice:394.02}
+    };
+    /* 单点主情景统一以各标的上一收盘价为基准；实时报价仅用于观察当下偏离。 */
+    const refreshedTargets = {
+      AAPL:{price:'355.59',move:'+0.71',pct:'+0.20%'},KO:{price:'97.73',move:'+0.29',pct:'+0.30%'},VOO:{price:'694.61',move:'-1.39',pct:'-0.20%'},QQQ:{price:'684.73',move:'-3.44',pct:'-0.50%'},MU:{price:'788.86',move:'-9.58',pct:'-1.20%'},NVDA:{price:'164.53',move:'-1.66',pct:'-1.00%'},INTC:{price:'60.77',move:'-0.43',pct:'-0.70%'},TSM:{price:'403.06',move:'-2.43',pct:'-0.60%'},TSLA:{price:'395.86',move:'-1.59',pct:'-0.40%'}
+    };
+    Object.assign(nextForecasts.intraday,refreshedTargets); Object.assign(nextForecasts.afterhours,refreshedTargets); nextForecasts.premarket={...refreshedTargets};
+    const sixFactorReasons = {
+      AAPL:factorAnalysis([['资金与买卖','最新可用报价上涨 0.86%，资金流短线仍偏正。'],['宏观经济','批发通胀同比偏高，利率压力限制高估值科技股的估值扩张。'],['市场情绪','AI 龙头事件令整体科技风险偏好转弱，苹果相对低波动。']], '主情景：下一交易日上涨 +0.20%，目标价 358.64 美元。','ppi'),
+      KO:factorAnalysis([['公司业绩','公司三季度收入增长 7%，并上调全年指引，基本面仍是支撑。'],['宏观经济','通胀偏高增加市场防御需求，消费必需品相对受益。'],['资金与买卖','最新可用报价上涨 1.66%，买盘强于大盘。']], '主情景：下一交易日上涨 +0.30%，目标价 99.35 美元。','koResults'),
+      VOO:factorAnalysis([['宏观经济','批发通胀同比 6.5%，市场会重新评估更高利率维持时间。'],['资金与买卖','最新可用报价下跌 0.93%，指数 ETF 出现风险减仓。'],['市场情绪','AI 龙头事件令风险资产情绪偏谨慎。']], '主情景：下一交易日下跌 -0.20%，目标价 688.15 美元。','ppi'),
+      QQQ:factorAnalysis([['行业及突发事件','英伟达 CEO 事件持续扰动 AI 龙头估值。'],['资金与买卖','最新可用报价下跌 1.90%，科技 ETF 卖压强于大盘。'],['宏观经济','较高通胀提高贴现率，对高估值成长股更不利。']], '主情景：下一交易日下跌 -0.50%，目标价 671.71 美元。','nvidiaEvent'),
+      MU:factorAnalysis([['行业及突发事件','AI 产业链估值重估仍在，存储链对资本开支预期高度敏感。'],['资金与买卖','最新可用报价下跌 4.92%，显示卖方主动性较强。'],['市场情绪','AI 龙头不确定性放大芯片股风险厌恶。']], '主情景：下一交易日下跌 -1.20%，目标价 750.04 美元。','nvidiaEvent'),
+      NVDA:factorAnalysis([['行业及突发事件','CEO 相关事件与市场对治理不确定性的担忧尚未消退。'],['资金与买卖','最新可用报价下跌 3.55%，卖压仍然明显。'],['市场情绪','作为 AI 风向标，其波动继续压制科技风险偏好。']], '主情景：下一交易日下跌 -1.00%，目标价 158.68 美元。','nvidiaEvent'),
+      INTC:factorAnalysis([['行业及突发事件','没有已核验的独立新增催化，主要承受半导体行业 beta 下行。'],['资金与买卖','最新可用报价下跌 4.69%，资金撤离幅度大。'],['宏观经济','高通胀/利率压力不利于周期与估值修复预期。']], '主情景：下一交易日下跌 -0.70%，目标价 57.92 美元。','ppi'),
+      TSM:factorAnalysis([['行业及突发事件','台积电是 AI 芯片关键代工环节，受英伟达事件的产业链传导影响。'],['资金与买卖','最新可用报价下跌 2.71%，短线卖压仍在。'],['市场情绪','AI 需求预期不确定性使供应链估值收缩。']], '主情景：下一交易日下跌 -0.60%，目标价 392.13 美元。','nvidiaEvent'),
+      TSLA:factorAnalysis([['资金与买卖','最新可用报价下跌 1.84%，成长股资金偏谨慎。'],['宏观经济','通胀偏高和利率压力会压制高估值可选消费/成长股。'],['市场情绪','科技板块走弱时，特斯拉的高 beta 属性通常放大波动。']], '主情景：下一交易日下跌 -0.40%，目标价 388.56 美元。','ppi')
+    };
+    const realtimeDifferenceAssessments = {
+      AAPL:'收益率上行与 VIX 走高削弱风险偏好，当前上涨缺乏广泛确认，因此将实时重估下调至接近持平。',
+      KO:'宏观风险信号偏空，但业绩与防御属性仍提供缓冲；将实时重估下调为温和上涨。',
+      VOO:'收益率上行与 VIX 走高均为极高权重偏空信号，且未见广度/成交量的反向确认，因此实时重估低于当前读数。',
+      QQQ:'收益率上行、VIX 走高、科技龙头同步偏弱三项高权重信号一致偏空，因此实时重估低于当前读数。',
+      MU:'高利率、VIX 走高和半导体弱势同时出现，未见成交量或市场广度的反向确认，因此实时重估继续下调。',
+      NVDA:'收益率上行、VIX 走高与治理不确定性叠加，尚未出现科技龙头反转确认，因此实时重估继续下调。',
+      INTC:'半导体 beta 走弱叠加收益率和 VIX 的偏空组合，未见反向确认，因此实时重估继续下调。',
+      TSM:'AI 供应链受科技龙头弱势传导，叠加收益率上行与 VIX 走高，实时重估继续下调。',
+      TSLA:'高 beta 成长股同时面对收益率上行、VIX 走高和科技风险偏好走弱，因此实时重估继续下调。'
+    };
+    const realtimeOutlooks = {
+      AAPL:'当前涨幅预计回落至接近持平，仍略高于上一收盘。', KO:'当前涨幅预计回落，但仍保持高于上一收盘。', VOO:'收益率与 VIX 的双重风险信号下，预计较当前实时价继续走弱。', QQQ:'收益率、VIX 与科技龙头三项高权重信号一致偏空，预计较当前实时价继续走弱。', MU:'半导体风险信号未改善，预计较当前实时价继续走弱，且波动仍高。', NVDA:'治理风险未解除，且收益率与 VIX 偏空，预计较当前实时价继续走弱。', INTC:'行业 beta 与宏观风险信号均偏空，预计较当前实时价继续走弱。', TSM:'供应链估值压力未缓解，预计较当前实时价继续走弱。', TSLA:'高 beta 风险偏好转弱，预计较当前实时价继续走弱。'
+    };
+    /* 独立于表格“本次预估”的实时重估：与实时涨跌、原预估一样，统一相对上一收盘价。 */
+    const realtimeReassessments = {
+      AAPL:{pct:'+0.10%',price:'355.23'}, KO:{pct:'+0.50%',price:'97.93'}, VOO:{pct:'-1.10%',price:'688.34'}, QQQ:{pct:'-2.30%',price:'672.34'}, MU:{pct:'-5.50%',price:'754.53'}, NVDA:{pct:'-4.30%',price:'159.04'}, INTC:{pct:'-5.30%',price:'57.96'}, TSM:{pct:'-3.30%',price:'392.11'}, TSLA:{pct:'-2.80%',price:'386.32'}
+    };
+    const reassessmentReasons = {
+      AAPL:'收益率上行和 VIX 走高不利于科技估值，且没有成交量、广度、龙头同步转强的确认；因此仅保留相对上一收盘的微幅上涨。',
+      KO:'收益率与 VIX 信号偏空，但业绩和防御属性提供支撑；因此下调涨幅，而不直接转为下跌。',
+      VOO:'收益率上行和 VIX 走高表明风险升温；在成交量、广度尚无反向确认时，重估为较当前实时价进一步走弱。',
+      QQQ:'收益率上行、VIX 走高、科技龙头走弱构成一致的偏空组合；在没有放量收复关键位置或广度改善前，重估为较当前实时价继续下行。',
+      MU:'存储链对 AI 风险偏好敏感；当收益率、VIX、半导体龙头同步偏空时，重估为较当前实时价继续走弱。',
+      NVDA:'治理事件未解除，且收益率上行和 VIX 走高均会放大高估值科技的风险折价；因此重估为较当前实时价继续下行，而非技术性回升。',
+      INTC:'行业 beta、收益率与 VIX 信号均偏空；在未见放量反转或市场广度改善前，重估为较当前实时价继续走弱。',
+      TSM:'AI 供应链估值仍受科技龙头弱势传导；收益率和 VIX 的偏空信号没有得到反转确认，重估为较当前实时价继续走弱。',
+      TSLA:'高 beta 成长股对收益率和风险偏好敏感；VIX 走高且科技龙头走弱时，重估为较当前实时价继续走弱。'
+    };
+    function tone(value) { return value.startsWith('+') ? 'up' : value.startsWith('-') ? 'down' : 'neutral'; }
+    let versionPremarketActuals=null;
+    function sessionActual(data, stage, ticker) {
+      if(stage==='intraday') return {close:data.close,actual:data.actual,reason:data.reason,label:'收盘价'};
+      if(stage==='afterhours' && data.after) return {...data.after,label:'盘后价'};
+      if(stage==='premarket' && versionPremarketActuals?.[ticker]) return {...versionPremarketActuals[ticker],label:'盘前价'};
+      if(stage==='premarket' && fridayPremarketData[ticker]) return {...fridayPremarketData[ticker],label:'盘前价'};
+      const name=stage==='premarket'?'盘前':'盘后';
+      return {pending:true,reason:`${name}：暂未取得可交叉验证的独立历史快照，本栏将等待对应时段数据回填，不以常规盘收盘结果代替。`};
+    }
+    function nextForecast(stage,ticker) {
+      const f=nextForecasts[stage] && nextForecasts[stage][ticker];
+      if(!f) return null;
+      const live=stageRealtimeData[stage]?.[ticker];
+      if(!live) return {...f,reason:`${sixFactorReasons[ticker]}<span class="analysis-line"><span class="analysis-key">实时状态</span>本版本对应时段尚未开盘，未使用旧版本实时价计算差异或重估；将在该时段获取新行情后回填。</span>`};
+      const forecastPct=parseFloat(f.pct), livePct=parseFloat(live.pct), delta=livePct-forecastPct, sign=delta>=0?'+':'', reassessed=realtimeReassessments[ticker];
+      const assessment=realtimeDifferenceAssessments[ticker].replace(/下一交易日/g,'本版本对应盘中收盘'), reason=reassessmentReasons[ticker].replace(/下一交易日/g,'本版本对应盘中收盘');
+      const reassessPct=parseFloat(reassessed.pct), versusLive=reassessPct-livePct, versusLiveSign=versusLive>=0?'+':'', liveDirection=versusLive>=0?'较当前实时价回升':'较当前实时价继续走弱';
+  const comparison=`<span class="analysis-line"><span class="analysis-key">盘中信号</span>${intradaySignals[ticker]}</span><span class="analysis-line"><span class="analysis-key">信号权重</span>美债收益率、VIX 为极高权重；指数/科技龙头、成交量、市场广度为高权重；DXY、原油、黄金为辅助信号。</span><span class="analysis-line"><span class="analysis-key">实时差异</span>均相对上一收盘：当前实时 ${live.pct} − 本版本盘中收盘预估 ${f.pct} = ${sign}${delta.toFixed(2)} 个百分点（${delta>=0?'当前表现更强':'当前表现更弱'}）；实时重估 ${reassessed.pct}。</span><span class="analysis-line"><span class="analysis-key">差异评估</span>${assessment} 本次实时重估为 ${reassessed.pct}（相对上一收盘）。</span><span class="analysis-line"><span class="analysis-key">实时预估走向</span>${realtimeOutlooks[ticker]} 实时重估 ${reassessed.pct}（相对上一收盘）。</span><span class="analysis-line"><span class="analysis-key">重估口径</span>当前实时 ${live.pct}、本版本盘中收盘预估 ${f.pct} 与实时重估 ${reassessed.pct} 均相对上一收盘；目标为中国北京时间 2026-11-14 05:00 的本版本盘中收盘，重估目标价 ${reassessed.price} 美元，预计${liveDirection} ${versusLiveSign}${versusLive.toFixed(2)} 个百分点。</span><span class="analysis-line"><span class="analysis-key">重估原因</span>${reason}</span>`;
+      return {...f,reason:`${sixFactorReasons[ticker]}${comparison}`};
+    }
+    function diffFor(stage,ticker) {
+      if(stage!=='premarket') return null;
+      const actual=fridayPremarketData[ticker], f=priorForecasts.premarket[ticker];
+      if(!actual || !f) return null;
+      const delta=Number(actual.close)-Number(f.price), pct=delta/Number(f.price)*100, sign=delta>=0?'+':'';
+      return {text:`相对预估 ${sign}${delta.toFixed(2)} 美元（${sign}${pct.toFixed(2)}%）`,reason:analysis(`实际盘前价 ${actual.close} 美元；15:30 单点预估为 ${f.price} 美元。`,'实际价格受盘前指数期货与个股/行业新闻共同影响；差额以单点主情景为基准计算。',`实际变动 ${actual.actual[0]} 美元（${actual.actual[1]}）；相对预估 ${sign}${delta.toFixed(2)} 美元（${sign}${pct.toFixed(2)}%）。`,'fridayBrief')};
+    }
+    function cell(label, stage, ticker) {
+      const data=marketData[ticker], session=sessionActual(data,stage,ticker);
+      if (label==='上次实际') return session.pending ? '<span class="neutral">待补齐</span><br><span class="muted">不以常规盘代替</span>' : `<span class="muted">${session.label} ${session.close} 美元</span><br><span class="num ${tone(session.actual[0])}">${session.actual[0]} 美元（${session.actual[1]}）</span>`;
+      const future=nextForecast(stage,ticker);
+      if(label==='本次预估' && future) return `<span class="muted">预估价 ${future.price} 美元</span><br><span class="num ${tone(future.move)}">${future.move} 美元（${future.pct}）</span>`;
+      return '<span class="neutral">待更新</span><br><span class="muted">— · —</span>';
+    }
+function realtimeCell(stage, ticker) {
+  const live=stageRealtimeData[stage]?.[ticker];
+  if(!live) return '<span class="muted">待回填</span>';
+  const previousClose=Number(marketData[ticker]?.close);
+  const livePrice=Number(live.price);
+  const calculatedMove=livePrice-previousClose;
+  const move=live.move || `${calculatedMove>=0?'+':''}${calculatedMove.toFixed(2)}`;
+  const pct=live.pct || `${calculatedMove>=0?'+':''}${(calculatedMove/previousClose*100).toFixed(2)}%`;
+  return `<span class="muted">实时价 ${livePrice.toFixed(2)} 美元</span><br><span class="num ${tone(pct)}">${move} 美元（${pct}）</span>`;
+}
+    function currentActualCell(stage, ticker) { const actual=stageActuals[stage]?.[ticker]; if(!actual) return '<span class="neutral">待回填</span><br><span class="muted">对应时段收盘后回填</span>'; return `<span class="muted">收盘价 ${actual.price} 美元</span><br><span class="num ${tone(actual.move)}">${actual.move} 美元（${actual.pct}）</span>`; }
+    let quoteView='realtime';
+    function quoteCell(stage, ticker) { return quoteView==='actual' ? currentActualCell(stage,ticker) : realtimeCell(stage,ticker); }
+    function quoteHeader(stage) {
+      const showingActual=quoteView==='actual';
+      const meta=stageQuoteMeta[stage], date=meta.date;
+      const updated=showingActual ? meta.actualUpdated : meta.realtimeUpdated;
+      const title=`${stages[stage].title}数据`;
+      return `<th><span class="th-title quote-title">${title}<span class="quote-switch" role="group" aria-label="${title}展示方式"><button class="quote-view-toggle ${showingActual?'':'active'}" type="button" data-quote-view="realtime" aria-pressed="${showingActual?'false':'true'}">实时涨跌</button><button class="quote-view-toggle ${showingActual?'active':''}" type="button" data-quote-view="actual" aria-pressed="${showingActual?'true':'false'}">本次实际</button></span></span><span class="th-date">${date}</span><span class="th-time">${updated}</span></th>`;
+    }
+    function comparisonUsesActual(stage) { return Object.keys(stageActuals[stage]||{}).length > 0; }
+    function comparisonHeader(stage) { return comparisonUsesActual(stage) ? '本次实际' : (Object.keys(stageRealtimeData[stage]||{}).length ? '实时涨跌' : '待回填'); }
+    function currentComparisonCell(stage, ticker) {
+      const forecast=nextForecast(stage,ticker); if(!forecast) return '<span class="neutral">待更新</span>';
+      const actual=stageActuals[stage]?.[ticker], compared=actual ? actual.pct : stageRealtimeData[stage]?.[ticker]?.pct;
+      if(!compared) return '<span class="neutral">待回填</span>';
+      const delta=parseFloat(compared)-parseFloat(forecast.pct), sign=delta>=0?'+':'', label=actual?'本次实际':'实时涨跌';
+      const state=delta>0?'live-up':delta<0?'live-down':'live-neutral';
+      return `<span class="live-tag ${state}" aria-label="${label}差异">差异 ${sign}${delta.toFixed(2)} 个百分点</span>`;
+    }
+    function currentComparisonReason(stage, ticker) { const actual=stageActuals[stage]?.[ticker]; if(actual) return `本次实际 ${actual.pct} − 本次预估 ${nextForecast(stage,ticker).pct}；两项均相对上一收盘，差异为 ${(parseFloat(actual.pct)-parseFloat(nextForecast(stage,ticker).pct)).toFixed(2)} 个百分点。`; const live=stageRealtimeData[stage]?.[ticker]; return live ? `本次实际尚未回填，暂以对应时段实时涨跌 ${live.pct} − 本次预估 ${nextForecast(stage,ticker).pct} 计算差异；两项均相对上一收盘。` : '对应时段数据尚未获得可验证快照，待回填后再计算差异。'; }
+    function futureTrendHeader(stage) { return comparisonUsesActual(stage) ? '本次实际' : (Object.keys(stageRealtimeData[stage]||{}).length ? '实时涨跌' : '待回填'); }
+    function futureTrendCell(stage, ticker) { const trend=futureTrends[ticker], actual=stageActuals[stage]?.[ticker], live=stageRealtimeData[stage]?.[ticker], base=actual ? Number(actual.price) : Number(live?.price); if(!trend || !base) return '<span class="muted">待回填</span>'; const formatPct=target=>{const value=(target/base-1)*100; return `${value>=0?'+':''}${value.toFixed(2)}%`;}; const next=formatPct(trend.nextPrice), week=formatPct(trend.weekPrice); return `<span class="muted">下一交易日目标收盘</span> <span class="num ${tone(next)}">${next}</span><br><span class="muted">1 周后目标收盘</span> <span class="num ${tone(week)}">${week}</span>`; }
+    function row(a, index, stage) {
+      const fields = stages[stage].fields;
+      const data=marketData[a[1]], session=sessionActual(data,stage,a[1]); const detailId=`${stage}-${index}`;
+      const actual=stageActuals[stage]?.[a[1]], future=nextForecast(stage,a[1]);
+      const detailItems = [
+        ['previousActual','上次实际',session.reason],
+        ['currentActual','本次实际',actual ? `本次收盘价 ${actual.price} 美元，变动 ${actual.move} 美元（${actual.pct}）；均以对应上一收盘为基准。${stage==='intraday'?`常规盘数据${stageQuoteMeta.intraday.actualUpdated}。`:stage==='afterhours'?`盘后报价为独立扩展时段快照，变动相对同日常规盘收盘价；${stageQuoteMeta.afterhours.actualUpdated}。`:`盘前数据按独立盘前快照回填；${stageQuoteMeta.premarket.actualUpdated}。`}` : `对应${stages[stage].title}时段尚未获得可验证收盘快照，待回填。`],
+        ['difference','预估与实际差异',currentComparisonReason(stage,a[1])],
+        ['forecast','本次预估',future ? future.reason : descriptions['本次预估']]
+      ];
+      const detailTabs=detailItems.map(([key,name],i)=>`<button class="detail-tab ${i===0?'active':''}" data-detail-for="${detailId}" data-detail-key="${key}">${name}</button>`).join('');
+      const detailPanels=detailItems.map(([key,name,content],i)=>`<div class="detail-panel ${i===0?'active':''}" data-detail-panel="${detailId}" data-detail-key="${key}"><b>${name}：</b>${content}</div>`).join('');
+      const categoryClass=a[2]==='保守类'?'tag-conservative':'tag-tech';
+      return `<tr><td class="asset">${a[0]}<span class="ticker">${a[1]}</span><span class="tag ${categoryClass}">${a[2]}</span></td>${fields.map(f=>`<td>${cell(f,stage,a[1])}</td>`).join('')}<td>${quoteCell(stage,a[1])}</td><td>${currentComparisonCell(stage,a[1])}</td><td>${futureTrendCell(stage,a[1])}</td><td><button class="toggle" data-id="${detailId}" aria-expanded="false">展开说明</button></td></tr><tr class="details-row"><td colspan="7"><div class="details" id="${detailId}"><div class="detail-tabs" role="tablist" aria-label="${a[0]} 信息说明">${detailTabs}</div>${detailPanels}</div></td></tr>`;
+    }
+    function render(stage) {
+      const s = stages[stage], meta=stageQuoteMeta[stage]; document.getElementById(stage).innerHTML = `<section class="section-head"><div><h2>${s.title}信息</h2></div><p>共 ${assets.length} 个关注标的</p></section><div class="table-card"><table><thead><tr><th class="asset-col">标的</th>${s.fields.map(f=>`<th><span class="th-title">${f}<span class="info" data-tip="${descriptions[f]}">i</span></span><span class="th-date">${fieldDates[stage][f]}</span><span class="th-time">${fieldTimes[stage][f]}</span></th>`).join('')}${quoteHeader(stage)}<th><span class="th-title comparison-title">预估与实际差异<span class="info" data-tip="${descriptions['预估与实际差异']}">i</span><span class="comparison-tag">${comparisonHeader(stage)}</span></span><span class="th-date">${meta.date}</span><span class="th-time">${comparisonUsesActual(stage)?meta.actualUpdated:meta.realtimeUpdated}</span></th><th><span class="th-title comparison-title">未来走势<span class="info" data-tip="${descriptions['未来走势']}">i</span><span class="comparison-tag">${futureTrendHeader(stage)}</span></span><span class="th-date">${futureTrendMeta.date}</span><span class="th-time">${futureTrendMeta.updated}</span></th><th>原因与情况</th></tr></thead><tbody>${assets.map((a,i)=>row(a,i,stage)).join('')}</tbody></table></div>`;
+    }
+    const versionDate = new URLSearchParams(location.search).get('date') || '2026-11-13';
+    function applyNovember16Version() {
+      /* 11/16 对应时段的实际结果：常规盘、盘后、盘前均独立保存。 */
+      const nov16Regular={
+        AAPL:{price:'352.78',move:'-3.49',pct:'-0.98%'},KO:{price:'99.48',move:'+0.23',pct:'+0.23%'},VOO:{price:'680.26',move:'-13.12',pct:'-1.89%'},
+        QQQ:{price:'661.75',move:'-18.14',pct:'-2.67%'},MU:{price:'719.02',move:'-59.29',pct:'-7.62%'},NVDA:{price:'156.14',move:'-6.71',pct:'-4.12%'},
+        INTC:{price:'55.47',move:'-4.19',pct:'-7.02%'},TSM:{price:'373.45',move:'-25.28',pct:'-6.34%'},TSLA:{price:'379.74',move:'-10.48',pct:'-2.69%'}
+      };
+      const nov16After={
+        AAPL:{price:'353.61',move:'+0.83',pct:'+0.24%'},KO:{price:'99.74',move:'+0.26',pct:'+0.26%'},VOO:{price:'680.00',move:'-0.26',pct:'-0.04%'},
+        QQQ:{price:'662.31',move:'+0.56',pct:'+0.08%'},MU:{price:'720.04',move:'+1.02',pct:'+0.14%'},NVDA:{price:'155.60',move:'-0.54',pct:'-0.35%'},
+        INTC:{price:'53.64',move:'-1.83',pct:'-3.30%'},TSM:{price:'372.64',move:'-0.81',pct:'-0.22%'},TSLA:{price:'379.32',move:'-0.42',pct:'-0.11%'}
+      };
+      const nov16Premarket={
+        AAPL:{price:'357.06',move:'+0.79',pct:'+0.22%'},KO:{price:'99.87',move:'+0.62',pct:'+0.62%'},
+        MU:{price:'742.23',move:'-36.08',pct:'-4.64%'},NVDA:{price:'159.00',move:'-3.85',pct:'-2.36%'},
+        INTC:{price:'56.65',move:'-3.01',pct:'-5.05%'},TSM:{price:'381.35',move:'-17.38',pct:'-4.36%'},TSLA:{price:'387.11',move:'-3.11',pct:'-0.80%'}
+      };
+      const premarketForecasts = {
+        AAPL:{price:'356.45',move:'+0.18',pct:'+0.05%'}, KO:{price:'99.36',move:'+0.10',pct:'+0.10%'},
+        VOO:{price:'692.65',move:'-0.69',pct:'-0.10%'}, QQQ:{price:'677.85',move:'-2.04',pct:'-0.30%'},
+        MU:{price:'772.86',move:'-5.45',pct:'-0.70%'}, NVDA:{price:'160.41',move:'-2.44',pct:'-1.50%'},
+        INTC:{price:'59.36',move:'-0.30',pct:'-0.50%'}, TSM:{price:'396.34',move:'-2.39',pct:'-0.60%'},
+        TSLA:{price:'387.49',move:'-2.73',pct:'-0.70%'}
+      };
+      const intradayForecasts = {
+        AAPL:{price:'356.63',move:'+0.36',pct:'+0.10%'}, KO:{price:'99.46',move:'+0.20',pct:'+0.20%'},
+        VOO:{price:'692.30',move:'-1.04',pct:'-0.15%'}, QQQ:{price:'676.83',move:'-3.06',pct:'-0.45%'},
+        MU:{price:'770.53',move:'-7.78',pct:'-1.00%'}, NVDA:{price:'159.59',move:'-3.26',pct:'-2.00%'},
+        INTC:{price:'59.24',move:'-0.42',pct:'-0.70%'}, TSM:{price:'395.68',move:'-3.05',pct:'-0.80%'},
+        TSLA:{price:'386.71',move:'-3.51',pct:'-0.90%'}
+      };
+      const afterhoursForecasts = {
+        AAPL:{price:'356.27',move:'+0.00',pct:'+0.00%'}, KO:{price:'99.41',move:'+0.15',pct:'+0.15%'},
+        VOO:{price:'691.95',move:'-1.39',pct:'-0.20%'}, QQQ:{price:'675.47',move:'-4.42',pct:'-0.65%'},
+        MU:{price:'768.97',move:'-9.34',pct:'-1.20%'}, NVDA:{price:'158.78',move:'-4.07',pct:'-2.50%'},
+        INTC:{price:'59.06',move:'-0.60',pct:'-1.00%'}, TSM:{price:'394.74',move:'-4.13',pct:'-1.10%'},
+        TSLA:{price:'385.54',move:'-4.68',pct:'-1.20%'}
+      };
+      Object.entries(currentActuals).forEach(([ticker,actual])=>{
+        Object.assign(marketData[ticker],{close:actual.price,actual:[actual.move,actual.pct],reason:analysis('11/13 美股常规盘已收盘；该版本以上一常规盘结果作为上次实际。','上次实际仅用于衔接本版本的预测基准，不代替 11/16 交易日的本次实际。',`收盘价 ${actual.price} 美元，变动 ${actual.move} 美元（${actual.pct}）。`,'nov13Close')});
+        marketData[ticker].after={close:afterhoursActuals[ticker].price,actual:[afterhoursActuals[ticker].move,afterhoursActuals[ticker].pct],reason:analysis('11/13 美股盘后报价已于美东约 19:59 快照确认。','盘后变动相对同日常规盘收盘价计算；它是扩展时段价格，不能替代常规盘收盘。',`盘后价 ${afterhoursActuals[ticker].price} 美元，变动 ${afterhoursActuals[ticker].move} 美元（${afterhoursActuals[ticker].pct}）。`,'nov13After')};
+      });
+      Object.assign(nextForecasts.premarket,premarketForecasts);
+      Object.assign(nextForecasts.intraday,intradayForecasts);
+      Object.assign(nextForecasts.afterhours,afterhoursForecasts);
+      Object.assign(sixFactorReasons,{
+        AAPL:analysis('周末没有苹果独立重大公告；高利率与科技风险偏好仍是背景变量。','苹果波动通常低于半导体，防御性资金可部分缓冲利率压力。','盘前主情景为 +0.05%，常规盘收盘主情景为 +0.10%。','weekAhead'),
+        KO:analysis('周末未见 KO 的重大新公告；下周有美联储官员讲话与零售数据窗口。','防御消费对科技风险外溢较不敏感，但宏观数据仍会影响整体风险偏好。','盘前主情景为 +0.10%，常规盘收盘主情景为 +0.20%。','weekAhead'),
+        VOO:analysis('周末延续的利率担忧与下周宏观事件窗口，使指数风险偏好偏谨慎。','大盘 ETF 同时受利率、市场广度和科技权重影响；缺少新行情确认前不作强方向假设。','盘前主情景为 -0.10%，常规盘收盘主情景为 -0.15%。','weekAhead'),
+        QQQ:analysis('上周科技股卖压后，周末仍面临英伟达治理事件和利率敏感性。','纳指 100 对半导体权重高；英伟达不确定性会通过风险偏好压低 ETF。','盘前主情景为 -0.30%，常规盘收盘主情景为 -0.45%。','weekendNvidia'),
+        MU:analysis('英伟达事件与 AI 资本开支担忧仍影响存储链估值。','美光对 AI 风险偏好敏感，事件未澄清时波动通常高于指数。','盘前主情景为 -0.70%，常规盘收盘主情景为 -1.00%。','weekendNvidia'),
+        NVDA:analysis('周末新增对英伟达治理和对华销售的公开质疑，且本周临近财报。','事件提高不确定性溢价，并会放大高估值科技股对利率和消息的敏感度。','盘前主情景为 -1.50%，常规盘收盘主情景为 -2.00%。','weekendNvidia'),
+        INTC:analysis('英伟达相关不确定性使半导体板块风险偏好偏弱。','英特尔不直接受该事件约束，但行业 beta 与利率环境仍可能传导压力。','盘前主情景为 -0.50%，常规盘收盘主情景为 -0.70%。','weekendNvidia'),
+        TSM:analysis('AI 供应链估值受英伟达风险事件与利率压力的双重影响。','作为关键代工环节，TSM ADR 会随 AI 需求预期和半导体风险偏好波动。','盘前主情景为 -0.60%，常规盘收盘主情景为 -0.80%。','weekendNvidia'),
+        TSLA:analysis('高 beta 成长股仍受利率和科技风险偏好影响。','当 VIX 与收益率偏高时，特斯拉波动通常会放大；暂无已验证的独立利好抵消该压力。','盘前主情景为 -0.70%，常规盘收盘主情景为 -0.90%。','weekAhead')
+      });
+      Object.assign(fieldDates.intraday,{'上次实际':'目标收盘：北京时间 2026-11-14 05:00','本次预估':'目标收盘：北京时间 2026-11-17 05:00'});
+      Object.assign(fieldDates.afterhours,{'上次实际':'目标收盘：北京时间 2026-11-14 09:00','本次预估':'目标收盘：北京时间 2026-11-17 09:00'});
+      Object.assign(fieldDates.premarket,{'上次实际':'目标收盘：北京时间 2026-11-13 22:30','本次预估':'目标收盘：北京时间 2026-11-16 22:30'});
+      Object.assign(fieldTimes.intraday,{'上次实际':'北京时间 2026-11-15 00:25 已核对','本次预估':'北京时间 2026-11-16 15:30 更新'});
+      Object.assign(fieldTimes.afterhours,{'上次实际':'北京时间 2026-11-15 01:00 已核对','本次预估':'北京时间 2026-11-16 24:00 更新'});
+      Object.assign(fieldTimes.premarket,{'上次实际':'北京时间 2026-11-14 20:30 已核对','本次预估':'北京时间 2026-11-16 15:30 更新'});
+      Object.assign(stageQuoteMeta.intraday,{date:'目标收盘：北京时间 2026-11-17 05:00',realtimeUpdated:'常规盘已收盘',actualUpdated:'北京时间 2026-11-17 09:00 已核对'});
+      Object.assign(stageQuoteMeta.afterhours,{date:'目标收盘：北京时间 2026-11-17 09:00',realtimeUpdated:'盘后时段已结束',actualUpdated:'北京时间 2026-11-17 09:00 已核对'});
+      Object.assign(stageQuoteMeta.premarket,{date:'目标收盘：北京时间 2026-11-16 22:30',realtimeUpdated:'盘前时段已结束',actualUpdated:'北京时间 2026-11-17 09:00 已核对'});
+      Object.assign(futureTrendMeta,{date:'目标收盘：北京时间 2026-11-18 05:00',updated:'1 周后目标收盘：北京时间 2026-11-24 05:00'});
+      stageActuals.intraday=nov16Regular; stageActuals.afterhours=nov16After; stageActuals.premarket=nov16Premarket;
+      stageRealtimeData.intraday=nov16Regular; stageRealtimeData.afterhours=nov16After; stageRealtimeData.premarket=nov16Premarket;
+      Object.assign(futureTrends,{AAPL:{nextPrice:352.43,weekPrice:354.19},KO:{nextPrice:99.58,weekPrice:99.98},VOO:{nextPrice:678.90,weekPrice:682.30},QQQ:{nextPrice:658.77,weekPrice:666.38},MU:{nextPrice:712.55,weekPrice:733.40},NVDA:{nextPrice:154.58,weekPrice:160.82},INTC:{nextPrice:55.03,weekPrice:56.58},TSM:{nextPrice:369.72,weekPrice:382.79},TSLA:{nextPrice:377.08,weekPrice:386.58}});
+      document.getElementById('versionDate').textContent='2026-11-16';
+      document.getElementById('updatedAt').textContent='2026-11-17 09:00 · 已回填 11/16 盘前、常规盘及盘后实际';
+      document.getElementById('outlookTime').textContent='中国北京时间 2026-11-16 15:30 更新 · 目标收盘：中国北京时间 2026-11-17 05:00（美股 2026-11-16 常规盘）';
+      document.getElementById('conservativeSignal').textContent='主情景：小幅上涨 +0.1%';
+      document.getElementById('conservativeText').innerHTML='<strong>上次实际：</strong>AAPL、KO 在 11/13 常规盘分别收于 356.27、99.26 美元；周末无独立重大利空，防御属性使其相对科技股更稳。';
+      document.getElementById('techSignal').textContent='主情景：下跌 -0.6%';
+      document.getElementById('techText').innerHTML='<strong>行业与资金：</strong>周末新增的英伟达治理与对华销售质疑未消除，且本周有英伟达财报与宏观事件窗口；QQQ、MU、NVDA、INTC、TSM、TSLA 的主情景维持偏弱。';
+    }
+    function applyNovember17Version() {
+      const nov17Regular={
+        AAPL:{price:'351.91',move:'-0.87',pct:'-0.25%'},KO:{price:'98.79',move:'-0.69',pct:'-0.69%'},VOO:{price:'673.19',move:'-7.07',pct:'-1.04%'},
+        QQQ:{price:'656.95',move:'-4.80',pct:'-0.73%'},MU:{price:'712.42',move:'-6.60',pct:'-0.92%'},NVDA:{price:'155.46',move:'-0.68',pct:'-0.44%'},
+        INTC:{price:'55.17',move:'-0.27',pct:'-0.49%'},TSM:{price:'359.69',move:'-13.76',pct:'-3.68%'},TSLA:{price:'380.11',move:'+0.37',pct:'+0.10%'}
+      };
+      const nov17After={
+        AAPL:{price:'350.03',move:'-1.88',pct:'-0.53%'},KO:{price:'98.09',move:'-0.70',pct:'-0.71%'},VOO:{price:'677.53',move:'+4.34',pct:'+0.64%'},
+        QQQ:{price:'665.71',move:'+8.76',pct:'+1.33%'},MU:{price:'747.00',move:'+34.58',pct:'+4.85%'},NVDA:{price:'157.65',move:'+2.19',pct:'+1.41%'},
+        INTC:{price:'56.10',move:'+0.93',pct:'+1.69%'},TSM:{price:'378.79',move:'+19.10',pct:'+5.31%'},TSLA:{price:'383.28',move:'+3.17',pct:'+0.83%'}
+      };
+      const nov16Regular={
+        AAPL:{price:'352.78',move:'-3.49',pct:'-0.98%'},KO:{price:'99.48',move:'+0.23',pct:'+0.23%'},VOO:{price:'680.26',move:'-13.12',pct:'-1.89%'},
+        QQQ:{price:'661.75',move:'-18.14',pct:'-2.67%'},MU:{price:'719.02',move:'-59.29',pct:'-7.62%'},NVDA:{price:'156.14',move:'-6.71',pct:'-4.12%'},
+        INTC:{price:'55.47',move:'-4.19',pct:'-7.02%'},TSM:{price:'373.45',move:'-25.28',pct:'-6.34%'},TSLA:{price:'379.74',move:'-10.48',pct:'-2.69%'}
+      };
+      /* 盘后与常规盘独立保存，变动均相对 11/16 常规盘收盘。 */
+      const nov16After={
+        AAPL:{price:'353.61',move:'+0.83',pct:'+0.24%'},KO:{price:'99.74',move:'+0.26',pct:'+0.26%'},VOO:{price:'680.00',move:'-0.26',pct:'-0.04%'},
+        QQQ:{price:'662.31',move:'+0.56',pct:'+0.08%'},MU:{price:'720.04',move:'+1.02',pct:'+0.14%'},NVDA:{price:'155.60',move:'-0.54',pct:'-0.35%'},
+        INTC:{price:'53.64',move:'-1.83',pct:'-3.30%'},TSM:{price:'372.64',move:'-0.81',pct:'-0.22%'},TSLA:{price:'379.32',move:'-0.42',pct:'-0.11%'}
+      };
+      versionPremarketActuals={
+        AAPL:{close:'357.06',actual:['+0.79','+0.22%'],reason:analysis('11/16 美股盘前 09:30 ET 的独立快照已核对。','盘前变动相对 11/13 常规盘收盘计算，不以 11/16 常规盘价格替代。','盘前价 357.06 美元，变动 +0.79 美元（+0.22%）。','nov16Premarket')},
+        KO:{close:'99.87',actual:['+0.62','+0.62%'],reason:analysis('11/16 美股盘前 09:30 ET 的独立快照已核对。','盘前变动相对 11/13 常规盘收盘计算。','盘前价 99.87 美元，变动 +0.62 美元（+0.62%）。','nov16Premarket')},
+        MU:{close:'742.23',actual:['-36.08','-4.64%'],reason:analysis('11/16 盘前收盘快照已核对。','AI 风险偏好转弱使存储链在开盘前承压。','盘前价 742.23 美元，变动 -36.08 美元（-4.64%）。','nov16Premarket')},
+        NVDA:{close:'159.00',actual:['-3.85','-2.36%'],reason:analysis('11/16 美股盘前 09:30 ET 的独立快照已核对。','治理事件不确定性在开盘前继续压制买盘。','盘前价 159.00 美元，变动 -3.85 美元（-2.36%）。','nov16Premarket')},
+        INTC:{close:'56.65',actual:['-3.01','-5.05%'],reason:analysis('11/16 美股盘前 09:30 ET 的独立快照已核对。','半导体行业 beta 偏弱，盘前卖压扩大。','盘前价 56.65 美元，变动 -3.01 美元（-5.05%）。','nov16Premarket')},
+        TSM:{close:'381.35',actual:['-17.38','-4.36%'],reason:analysis('11/16 盘前收盘快照已核对。','AI 供应链估值与半导体风险偏好同步承压。','盘前价 381.35 美元，变动 -17.38 美元（-4.36%）。','nov16Premarket')},
+        TSLA:{close:'387.11',actual:['-3.11','-0.80%'],reason:analysis('11/16 美股盘前 09:30 ET 的独立快照已核对。','成长股风险偏好走弱使特斯拉盘前承压。','盘前价 387.11 美元，变动 -3.11 美元（-0.80%）。','nov16Premarket')}
+      };
+      const premarketForecasts={
+        AAPL:{price:'353.13',move:'+0.35',pct:'+0.10%'},KO:{price:'99.58',move:'+0.10',pct:'+0.10%'},VOO:{price:'678.90',move:'-1.36',pct:'-0.20%'},
+        QQQ:{price:'658.77',move:'-2.98',pct:'-0.45%'},MU:{price:'712.55',move:'-6.47',pct:'-0.90%'},NVDA:{price:'154.58',move:'-1.56',pct:'-1.00%'},
+        INTC:{price:'55.03',move:'-0.44',pct:'-0.80%'},TSM:{price:'369.72',move:'-3.73',pct:'-1.00%'},TSLA:{price:'377.08',move:'-2.66',pct:'-0.70%'}
+      };
+      const intradayForecasts={
+        AAPL:{price:'352.07',move:'-0.71',pct:'-0.20%'},KO:{price:'99.58',move:'+0.10',pct:'+0.10%'},VOO:{price:'677.54',move:'-2.72',pct:'-0.40%'},
+        QQQ:{price:'657.12',move:'-4.63',pct:'-0.70%'},MU:{price:'708.95',move:'-10.07',pct:'-1.40%'},NVDA:{price:'153.02',move:'-3.12',pct:'-2.00%'},
+        INTC:{price:'54.47',move:'-1.00',pct:'-1.80%'},TSM:{price:'367.85',move:'-5.60',pct:'-1.50%'},TSLA:{price:'376.32',move:'-3.42',pct:'-0.90%'}
+      };
+      const afterhoursForecasts={
+        AAPL:{price:'352.43',move:'-0.35',pct:'-0.10%'},KO:{price:'99.48',move:'+0.00',pct:'+0.00%'},VOO:{price:'676.86',move:'-3.40',pct:'-0.50%'},
+        QQQ:{price:'655.14',move:'-6.61',pct:'-1.00%'},MU:{price:'705.36',move:'-13.66',pct:'-1.90%'},NVDA:{price:'151.46',move:'-4.68',pct:'-3.00%'},
+        INTC:{price:'54.14',move:'-1.33',pct:'-2.40%'},TSM:{price:'366.36',move:'-7.09',pct:'-1.90%'},TSLA:{price:'375.18',move:'-4.56',pct:'-1.20%'}
+      };
+      Object.entries(nov16Regular).forEach(([ticker,actual])=>{
+        Object.assign(marketData[ticker],{close:actual.price,actual:[actual.move,actual.pct],reason:analysis('11/16 美股常规盘收盘已核对；科技、半导体在英伟达事件与 AI 风险偏好走弱背景下领跌。','上次实际采用常规盘收盘，作为本版本全部预估、差异的统一比较基准。',`收盘价 ${actual.price} 美元，变动 ${actual.move} 美元（${actual.pct}）。`,'nov16Close')});
+        const after=nov16After[ticker];
+        marketData[ticker].after={close:after.price,actual:[after.move,after.pct],reason:analysis('11/16 盘后时段独立快照已记录。','盘后变动以同日常规盘收盘为基准，不以常规盘数据替代盘后价格。',`盘后价 ${after.price} 美元，较常规盘 ${after.move} 美元（${after.pct}）。`,'nov16After')};
+      });
+      Object.assign(nextForecasts.premarket,premarketForecasts); Object.assign(nextForecasts.intraday,intradayForecasts); Object.assign(nextForecasts.afterhours,afterhoursForecasts);
+      Object.assign(sixFactorReasons,{
+        AAPL:analysis('11/16 常规盘回落 0.98%，但盘后小幅回升；本日核心宏观窗口为零售销售，科技整体仍受风险偏好影响。','苹果相对半导体波动较低，但若收益率上行及科技龙头同步走弱，估值仍会承压。','盘前主情景 +0.10%，常规盘收盘主情景 -0.20%。','nov17Catalysts'),
+        KO:analysis('KO 在 11/16 常规盘小幅上涨，盘后继续小幅上行。','防御消费受 AI 链卖压的直接传导较弱；零售销售数据仍可能影响市场整体风险偏好。','盘前与常规盘主情景均为 +0.10%。','nov17Catalysts'),
+        VOO:analysis('11/16 标普相关 ETF 下跌 1.89%，反映大盘风险偏好转弱。','收益率、市场广度与大型科技权重共同决定指数；零售销售数据会改变利率路径预期。','盘前主情景 -0.20%，常规盘收盘主情景 -0.40%。','nov17Catalysts'),
+        QQQ:analysis('QQQ 11/16 下跌 2.67%，科技卖压明显，盘后仅小幅修复。','纳指 100 对 AI 与半导体权重高；英伟达财报前的不确定性和利率压力仍会放大波动。','盘前主情景 -0.45%，常规盘收盘主情景 -0.70%。','nov17Catalysts'),
+        MU:analysis('MU 11/16 下跌 7.62%，盘后仅回升 0.14%。','存储链对 AI 需求、出口限制与风险偏好敏感，强跌后虽可能反弹但未出现趋势反转确认。','盘前主情景 -0.90%，常规盘收盘主情景 -1.40%。','nov17Catalysts'),
+        NVDA:analysis('NVDA 11/16 下跌 4.12%，盘后仍跌 0.35%；市场关注本交易日盘后的财报与治理不确定性。','财报、指引和领导层事件会同时影响公司估值，并通过 AI 权重传导至科技与供应链。','盘前主情景 -1.00%，常规盘收盘主情景 -2.00%。','nov17Catalysts'),
+        INTC:analysis('INTC 11/16 下跌 7.02%，盘后再跌 3.30%。','行业 beta、AI 链风险偏好及个股卖压同时偏空；在未见成交量与市场广度反转前，维持谨慎。','盘前主情景 -0.80%，常规盘收盘主情景 -1.80%。','nov17Catalysts'),
+        TSM:analysis('TSM 11/16 下跌 6.34%，盘后继续小幅走弱。','AI 供应链对英伟达财报、资本开支指引和收益率高度敏感，盘前与盘中均需防范高波动。','盘前主情景 -1.00%，常规盘收盘主情景 -1.50%。','nov17Catalysts'),
+        TSLA:analysis('TSLA 11/16 下跌 2.69%，盘后小幅续跌。','高 beta 成长股对利率和市场风险偏好敏感；没有独立催化时，可能随科技板块波动。','盘前主情景 -0.70%，常规盘收盘主情景 -0.90%。','nov17Catalysts')
+      });
+      Object.assign(fieldDates.intraday,{'上次实际':'目标收盘：北京时间 2026-11-17 05:00','本次预估':'目标收盘：北京时间 2026-11-18 05:00'});
+      Object.assign(fieldDates.afterhours,{'上次实际':'目标收盘：北京时间 2026-11-17 09:00','本次预估':'目标收盘：北京时间 2026-11-18 09:00'});
+      Object.assign(fieldDates.premarket,{'上次实际':'目标收盘：北京时间 2026-11-16 22:30','本次预估':'目标收盘：北京时间 2026-11-17 22:30'});
+      Object.assign(fieldTimes.intraday,{'上次实际':'北京时间 2026-11-17 09:00 已核对','本次预估':'北京时间 2026-11-17 20:30 更新'});
+      Object.assign(fieldTimes.afterhours,{'上次实际':'北京时间 2026-11-17 09:00 已核对','本次预估':'北京时间 2026-11-18 00:00 更新'});
+      Object.assign(fieldTimes.premarket,{'上次实际':'待独立盘前快照补齐','本次预估':'北京时间 2026-11-17 15:30 更新'});
+      Object.assign(stageQuoteMeta.intraday,{date:'目标收盘：北京时间 2026-11-18 05:00',realtimeUpdated:'待北京时间 2026-11-17 22:30 开盘刷新',actualUpdated:'常规盘收盘后回填'});
+      Object.assign(stageQuoteMeta.afterhours,{date:'目标收盘：北京时间 2026-11-18 09:00',realtimeUpdated:'待盘后时段刷新',actualUpdated:'盘后时段结束后回填'});
+      Object.assign(stageQuoteMeta.premarket,{date:'目标收盘：北京时间 2026-11-17 22:30',realtimeUpdated:'待盘前时段刷新',actualUpdated:'盘前时段结束后回填'});
+      Object.assign(futureTrendMeta,{date:'目标收盘：北京时间 2026-11-19 05:00',updated:'1 周后目标收盘：北京时间 2026-11-25 05:00'});
+      stageActuals.intraday=nov17Regular; stageActuals.afterhours=nov17After; stageActuals.premarket={};
+      stageRealtimeData.intraday=nov17Regular; stageRealtimeData.afterhours=nov17After; stageRealtimeData.premarket={};
+      document.getElementById('versionDate').textContent='2026-11-17';
+      document.getElementById('updatedAt').textContent='2026-11-18 09:00 · 已回填 11/17 常规盘及盘后实际';
+      document.getElementById('outlookTime').textContent='中国北京时间 2026-11-17 09:00 更新 · 本次目标收盘：中国北京时间 2026-11-18 05:00（美股 2026-11-17 常规盘）';
+      document.getElementById('conservativeSignal').textContent='主情景：小幅上涨 +0.1%';
+      document.getElementById('conservativeText').innerHTML='<strong>已核对实际：</strong>AAPL 11/16 常规盘 -0.98%，KO +0.23%；防御属性相对占优，但零售销售仍可能影响整体风险偏好。';
+      document.getElementById('techSignal').textContent='主情景：下跌 -0.8%';
+      document.getElementById('techText').innerHTML='<strong>行业与资金：</strong>QQQ -2.67%、MU -7.62%、NVDA -4.12%、TSM -6.34%；零售销售与英伟达财报前，科技类维持偏空且波动偏高。';
+    }
+    function applyNovember18Version() {
+      /* 北京时间 11/18 版本以上一个美股常规盘（11/17）为统一基准。 */
+      const nov17Regular={
+        AAPL:{price:'351.91',move:'-0.87',pct:'-0.25%'},KO:{price:'98.79',move:'-0.69',pct:'-0.69%'},VOO:{price:'673.19',move:'-7.07',pct:'-1.04%'},
+        QQQ:{price:'656.95',move:'-4.80',pct:'-0.73%'},MU:{price:'712.42',move:'-6.60',pct:'-0.92%'},NVDA:{price:'155.46',move:'-0.68',pct:'-0.44%'},
+        INTC:{price:'55.17',move:'-0.27',pct:'-0.49%'},TSM:{price:'359.69',move:'-13.76',pct:'-3.68%'},TSLA:{price:'380.11',move:'+0.37',pct:'+0.10%'}
+      };
+      const nov17After={
+        AAPL:{price:'350.03',move:'-1.88',pct:'-0.53%'},KO:{price:'98.09',move:'-0.70',pct:'-0.71%'},VOO:{price:'677.53',move:'+4.34',pct:'+0.64%'},
+        QQQ:{price:'665.71',move:'+8.76',pct:'+1.33%'},MU:{price:'747.00',move:'+34.58',pct:'+4.85%'},NVDA:{price:'157.65',move:'+2.19',pct:'+1.41%'},
+        INTC:{price:'56.10',move:'+0.93',pct:'+1.69%'},TSM:{price:'378.79',move:'+19.10',pct:'+5.31%'},TSLA:{price:'383.28',move:'+3.17',pct:'+0.83%'}
+      };
+      const nov18Regular={
+        AAPL:{price:'352.45',move:'+0.54',pct:'+0.15%'},KO:{price:'98.04',move:'-0.75',pct:'-0.76%'},VOO:{price:'671.31',move:'-1.88',pct:'-0.28%'},
+        QQQ:{price:'659.51',move:'+2.56',pct:'+0.39%'},MU:{price:'705.27',move:'-7.15',pct:'-1.00%'},NVDA:{price:'150.96',move:'-4.50',pct:'-2.89%'},
+        INTC:{price:'54.67',move:'-0.50',pct:'-0.91%'},TSM:{price:'362.62',move:'+2.93',pct:'+0.81%'},TSLA:{price:'383.72',move:'+3.61',pct:'+0.95%'}
+      };
+      /* 盘后独立快照，变动相对 11/18 常规盘收盘计算。 */
+      const nov18After={
+        AAPL:{price:'353.05',move:'+0.60',pct:'+0.17%'},KO:{price:'97.91',move:'-0.13',pct:'-0.13%'},VOO:{price:'670.91',move:'-0.40',pct:'-0.06%'},
+        QQQ:{price:'666.25',move:'+6.74',pct:'+1.02%'},MU:{price:'700.80',move:'-4.47',pct:'-0.63%'},NVDA:{price:'152.33',move:'+1.37',pct:'+0.91%'},
+        INTC:{price:'55.40',move:'+0.73',pct:'+1.34%'},TSM:{price:'376.44',move:'+13.82',pct:'+3.81%'},TSLA:{price:'381.88',move:'-1.84',pct:'-0.48%'}
+      };
+      const makeForecasts=(rates)=>Object.fromEntries(Object.entries(rates).map(([ticker,pct])=>{
+        const base=Number(nov17Regular[ticker].price), price=base*(1+pct/100), move=price-base;
+        return [ticker,{price:price.toFixed(2),move:`${move>=0?'+':''}${move.toFixed(2)}`,pct:`${pct>=0?'+':''}${pct.toFixed(2)}%`}];
+      }));
+      const premarketForecasts=makeForecasts({AAPL:0.20,KO:0.00,VOO:0.15,QQQ:0.55,MU:1.20,NVDA:2.20,INTC:0.40,TSM:1.00,TSLA:0.35});
+      const intradayForecasts=makeForecasts({AAPL:0.10,KO:0.05,VOO:0.05,QQQ:0.35,MU:0.80,NVDA:1.40,INTC:0.20,TSM:0.70,TSLA:0.20});
+      const afterhoursForecasts=makeForecasts({AAPL:0.00,KO:0.05,VOO:-0.05,QQQ:0.10,MU:0.30,NVDA:0.50,INTC:0.00,TSM:0.20,TSLA:0.10});
+      Object.entries(nov17Regular).forEach(([ticker,actual])=>{
+        Object.assign(marketData[ticker],{close:actual.price,actual:[actual.move,actual.pct],reason:analysis('11/17 美股常规盘收盘已核对。','上次实际采用常规盘收盘，作为本版本预估与差异的统一比较基准。',`收盘价 ${actual.price} 美元，变动 ${actual.move} 美元（${actual.pct}）。`,'nov17Close')});
+        const after=nov17After[ticker];
+        marketData[ticker].after={close:after.price,actual:[after.move,after.pct],reason:analysis('11/17 盘后时段独立快照已记录。','盘后变动以同日常规盘收盘为基准，不能用常规盘价格替代。',`盘后价 ${after.price} 美元，较常规盘 ${after.move} 美元（${after.pct}）。`,'nov17After')};
+      });
+      versionPremarketActuals=null;
+      Object.assign(nextForecasts.premarket,premarketForecasts); Object.assign(nextForecasts.intraday,intradayForecasts); Object.assign(nextForecasts.afterhours,afterhoursForecasts);
+      Object.assign(sixFactorReasons,{
+        AAPL:analysis('英伟达业绩超预期提升科技风险偏好，但市场波动仍高。','苹果缺少独立财报催化，主要受市场广度、收益率和科技龙头同步性影响，预估幅度低于芯片股。','盘前主情景 +0.20%，常规盘收盘主情景 +0.10%。','nov17Macro'),
+        KO:analysis('英伟达业绩利好主要传导至科技；KO 暂无已核验的独立新催化。','防御消费对 AI 消息敏感度低，若风险偏好回升仅温和受益；收益率与整体广度仍是约束。','盘前主情景 +0.00%，常规盘收盘主情景 +0.05%。','nov17Macro'),
+        VOO:analysis('英伟达业绩超预期，但前一交易日市场风险偏好仍偏谨慎。','指数同时受科技权重、收益率、VIX和市场广度影响；国债收益率小幅回落提供支撑，但不足以消除高波动。','盘前主情景 +0.15%，常规盘收盘主情景 +0.05%。','nov17Macro'),
+        QQQ:analysis('英伟达第三财季营收 1,158 亿美元、数据中心营收 1,076 亿美元，均显著增长。','业绩改善 AI 需求预期并支撑纳指权重；但高波动环境下，反弹是否延续仍需半导体成交量和市场广度确认。','盘前主情景 +0.55%，常规盘收盘主情景 +0.35%。','nvdaQ3'),
+        MU:analysis('英伟达业绩显示数据中心与 AI 基建需求仍强。','存储链可从 AI 资本开支预期获得情绪支持，但此前波动大，开盘后的量价与半导体广度决定修复持续性。','盘前主情景 +1.20%，常规盘收盘主情景 +0.80%。','nvdaQ3'),
+        NVDA:analysis('英伟达公布第三财季营收 1,158 亿美元，同比增 103%；数据中心营收同比增 110%。','强业绩和产品出货进展支持基本面，但高 VIX 与市场对 AI 估值的谨慎会压缩单日反弹的确定性。','盘前主情景 +2.20%，常规盘收盘主情景 +1.40%。','nvdaQ3'),
+        INTC:analysis('英伟达业绩利好改善半导体整体风险偏好。','INTC 不直接等同于英伟达基本面，主要通过行业 beta 受益；需观察收益率、半导体广度与成交量是否确认。','盘前主情景 +0.40%，常规盘收盘主情景 +0.20%。','nvdaQ3'),
+        TSM:analysis('英伟达数据中心业务增长和产品出货进展利好 AI 供应链预期。','TSM ADR 对 AI 订单预期敏感，利好可推动修复；但前一日大幅波动后，盘中仍可能受收益率与板块风险偏好扰动。','盘前主情景 +1.00%，常规盘收盘主情景 +0.70%。','nvdaQ3'),
+        TSLA:analysis('英伟达业绩改善科技情绪，但特斯拉暂无直接对应的公司级催化。','TSLA 作为高 beta 成长股可随纳指风险偏好修复，但对收益率和 VIX 的敏感度使其日内上行幅度保持克制。','盘前主情景 +0.35%，常规盘收盘主情景 +0.20%。','nov17Macro')
+      });
+      Object.assign(fieldDates.intraday,{'上次实际':'目标收盘：北京时间 2026-11-18 05:00','本次预估':'目标收盘：北京时间 2026-11-19 05:00'});
+      Object.assign(fieldDates.afterhours,{'上次实际':'目标收盘：北京时间 2026-11-18 09:00','本次预估':'目标收盘：北京时间 2026-11-19 09:00'});
+      Object.assign(fieldDates.premarket,{'上次实际':'目标收盘：北京时间 2026-11-17 22:30','本次预估':'目标收盘：北京时间 2026-11-18 22:30'});
+      Object.assign(fieldTimes.intraday,{'上次实际':'北京时间 2026-11-18 09:00 已核对','本次预估':'北京时间 2026-11-18 20:30 更新'});
+      Object.assign(fieldTimes.afterhours,{'上次实际':'北京时间 2026-11-18 09:00 已核对','本次预估':'北京时间 2026-11-19 00:00 更新'});
+      Object.assign(fieldTimes.premarket,{'上次实际':'待独立盘前快照补齐','本次预估':'北京时间 2026-11-18 15:30 更新'});
+      Object.assign(stageQuoteMeta.intraday,{date:'目标收盘：北京时间 2026-11-19 05:00',realtimeUpdated:'待北京时间 2026-11-18 22:30 开盘刷新',actualUpdated:'常规盘收盘后回填'});
+      Object.assign(stageQuoteMeta.afterhours,{date:'目标收盘：北京时间 2026-11-19 09:00',realtimeUpdated:'待盘后时段刷新',actualUpdated:'盘后时段结束后回填'});
+      Object.assign(stageQuoteMeta.premarket,{date:'目标收盘：北京时间 2026-11-18 22:30',realtimeUpdated:'待盘前时段刷新',actualUpdated:'盘前时段结束后回填'});
+      Object.assign(futureTrendMeta,{date:'目标收盘：北京时间 2026-11-20 05:00',updated:'1 周后目标收盘：北京时间 2026-11-26 05:00'});
+      stageActuals.intraday=nov18Regular; stageActuals.afterhours=nov18After; stageActuals.premarket={};
+      stageRealtimeData.intraday=nov18Regular; stageRealtimeData.afterhours=nov18After; stageRealtimeData.premarket={};
+      Object.assign(futureTrends,{AAPL:{nextPrice:352.26,weekPrice:354.02},KO:{nextPrice:98.84,weekPrice:99.14},VOO:{nextPrice:673.53,weekPrice:676.22},QQQ:{nextPrice:659.25,weekPrice:662.86},MU:{nextPrice:718.12,weekPrice:725.24},NVDA:{nextPrice:157.64,weekPrice:160.12},INTC:{nextPrice:55.28,weekPrice:55.72},TSM:{nextPrice:362.21,weekPrice:364.73},TSLA:{nextPrice:380.87,weekPrice:382.77}});
+      document.getElementById('versionDate').textContent='2026-11-18';
+      Object.assign(stageQuoteMeta.intraday,{realtimeUpdated:'常规盘已收盘',actualUpdated:'北京时间 2026-11-19 09:00 已核对'});
+      Object.assign(stageQuoteMeta.afterhours,{realtimeUpdated:'盘后时段已结束',actualUpdated:'北京时间 2026-11-19 09:00 已核对'});
+      document.getElementById('updatedAt').textContent='2026-11-19 09:00 · 已回填 11/18 常规盘及盘后实际';
+      document.getElementById('outlookTime').textContent='中国北京时间 2026-11-18 09:00 更新 · 本次目标收盘：中国北京时间 2026-11-19 05:00（美股 2026-11-18 常规盘）';
+      document.getElementById('conservativeSignal').textContent='主情景：窄幅偏强 +0.1%';
+      document.getElementById('conservativeText').innerHTML='<strong>宏观与情绪：</strong>国债收益率小幅回落提供支撑，但高波动环境未消除；AAPL 偏强、KO 中性，均以市场广度确认。';
+      document.getElementById('techSignal').textContent='主情景：业绩驱动修复 +0.8%';
+      document.getElementById('techText').innerHTML='<strong>行业与资金：</strong>英伟达 Q3 营收与数据中心营收强劲，利好 NVDA、TSM、MU 及 QQQ；同时 VIX 偏高，收盘幅度低于盘前，需以收益率、成交量和广度确认。';
+    }
+    if(versionDate==='2026-11-16') applyNovember16Version();
+    if(versionDate==='2026-11-17') applyNovember17Version();
+    if(versionDate==='2026-11-18') applyNovember18Version();
+    document.getElementById('datePicker').value=versionDate;
+    Object.keys(stages).forEach(render);
+    function showToast(message, type='success') { const toast=document.getElementById('toast'); toast.textContent=message; toast.className=`toast ${type} show`; setTimeout(()=>toast.classList.remove('show'),3200); }
+    function bjTime() { return new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date()).replaceAll('/','-'); }
+    async function fetchNasdaqQuote(ticker) {
+      const assetclass=['VOO','QQQ'].includes(ticker)?'etf':'stocks';
+      const response=await fetch(`https://api.nasdaq.com/api/quote/${encodeURIComponent(ticker)}/info?assetclass=${assetclass}`,{cache:'no-store',headers:{Accept:'application/json, text/plain, */*'}});
+      if(!response.ok) throw new Error(`Nasdaq 行情服务返回 ${response.status}`);
+      const primary=(await response.json())?.data?.primaryData;
+      const price=Number(String(primary?.lastSalePrice||'').replace(/[$,]/g,''));
+      const change=Number(String(primary?.netChange||'').replace(/[$,]/g,''));
+      const pct=String(primary?.percentageChange||'').replace(/[()]/g,'').replace(/\s/g,'');
+      if(!Number.isFinite(price) || !Number.isFinite(change) || !pct) throw new Error('Nasdaq 行情数据不完整');
+      return {price:price.toFixed(2),pct:pct.endsWith('%')?pct:`${pct}%`,move:`${change>=0?'+':''}${change.toFixed(2)}`};
+    }
+    async function fetchYahooQuote(ticker) {
+      const response=await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?interval=1m&range=1d&includePrePost=true`,{cache:'no-store'});
+      if(!response.ok) throw new Error(`行情服务返回 ${response.status}`);
+      const payload=await response.json(), result=payload?.chart?.result?.[0], quote=result?.indicators?.quote?.[0], meta=result?.meta;
+      const price=[...(quote?.close||[])].reverse().find(value=>Number.isFinite(value));
+      const previousClose=Number(meta?.chartPreviousClose ?? meta?.previousClose ?? meta?.regularMarketPreviousClose);
+      if(!Number.isFinite(price) || !Number.isFinite(previousClose) || previousClose===0) throw new Error('行情数据不完整');
+      const pct=((price/previousClose-1)*100).toFixed(2), move=(price-previousClose).toFixed(2);
+      return {price:price.toFixed(2),pct:`${Number(pct)>=0?'+':''}${pct}%`,move:`${Number(move)>=0?'+':''}${move}`};
+    }
+    async function fetchYahooQuoteBatch(tickers) {
+      const symbols=tickers.map(encodeURIComponent).join(',');
+      const response=await fetch(`https://query1.finance.yahoo.com/v7/finance/spark?symbols=${symbols}&range=1d&interval=1m`,{cache:'no-store'});
+      if(!response.ok) throw new Error(`批量行情服务返回 ${response.status}`);
+      const results=(await response.json())?.spark?.result || [];
+      const quotes={};
+      results.forEach(result=>{
+        const ticker=result.symbol, responseItem=result.response?.[0], meta=responseItem?.meta || {};
+        const prices=responseItem?.indicators?.quote?.[0]?.close || [];
+        const price=Number([...prices].reverse().find(value=>Number.isFinite(value)) ?? meta.regularMarketPrice);
+        const previousClose=Number(meta.chartPreviousClose ?? meta.previousClose ?? meta.regularMarketPreviousClose);
+        if(!ticker || !Number.isFinite(price) || !Number.isFinite(previousClose) || previousClose===0) return;
+        const pct=(price/previousClose-1)*100, move=price-previousClose;
+        quotes[ticker]={price:price.toFixed(2),pct:`${pct>=0?'+':''}${pct.toFixed(2)}%`,move:`${move>=0?'+':''}${move.toFixed(2)}`};
+      });
+      return quotes;
+    }
+    async function fetchLatestQuote(ticker) {
+      const errors=[];
+      for(const source of [fetchNasdaqQuote,fetchYahooQuote]) { try { return await source(ticker); } catch(error) { errors.push(error.message); } }
+      throw new Error(errors.join('；'));
+    }
+    async function refreshRealtimeQuotes() {
+      const button=document.getElementById('refreshQuotes'); button.disabled=true; button.textContent='正在刷新…';
+      const tickers=assets.map(([,ticker])=>ticker); let batchQuotes={};
+      try { batchQuotes=await fetchYahooQuoteBatch(tickers); } catch(error) { batchQuotes={}; }
+      const missing=tickers.filter(ticker=>!batchQuotes[ticker]);
+      const fallbackResults=await Promise.all(missing.map(async ticker=>{ try { return [ticker,await fetchNasdaqQuote(ticker)]; } catch(error) { return [ticker,null]; } }));
+      fallbackResults.forEach(([ticker,quote])=>{ if(quote) batchQuotes[ticker]=quote; });
+      const results=tickers.map(ticker=>[ticker,batchQuotes[ticker]||null]);
+      const updatedAt=bjTime(), succeeded=results.filter(([,quote])=>quote).length;
+      results.forEach(([ticker,quote])=>{ if(quote) realtimeData[ticker]={...realtimeData[ticker],...quote,updated:`中国北京时间 ${updatedAt}`}; });
+      if(succeeded) { realtimeMeta.updated=`数据更新：中国北京时间 ${updatedAt}`; Object.keys(stages).forEach(render); showToast(`已刷新 ${succeeded}/${assets.length} 个标的的实时行情`,succeeded===assets.length?'success':'warn'); }
+      else showToast('实时行情服务暂不可用，请稍后重试','error');
+      button.disabled=false; button.textContent='刷新实时行情';
+    }
+    document.addEventListener('click', e => {
+      const quoteToggle=e.target.closest('.quote-view-toggle'); if(quoteToggle){ quoteView=quoteToggle.dataset.quoteView; Object.keys(stages).forEach(render); return; }
+      const tab = e.target.closest('.tab'); if(tab){ document.querySelectorAll('.tab,.panel').forEach(el=>el.classList.remove('active')); tab.classList.add('active'); document.getElementById(tab.dataset.tab).classList.add('active'); return; }
+      const button = e.target.closest('.toggle'); if(button){ const d=document.getElementById(button.dataset.id), open=d.classList.toggle('open'); button.textContent=open?'收起说明':'展开说明'; button.setAttribute('aria-expanded',open); return; }
+      const detailTab = e.target.closest('.detail-tab'); if(detailTab){ const id=detailTab.dataset.detailFor, key=detailTab.dataset.detailKey; document.querySelectorAll(`[data-detail-for="${id}"]`).forEach(el=>el.classList.toggle('active',el===detailTab)); document.querySelectorAll(`[data-detail-panel="${id}"]`).forEach(el=>el.classList.toggle('active',el.dataset.detailKey===key)); }
+    });
+    document.addEventListener('pointerover', e => { const icon=e.target.closest('.info'); if(!icon) return; const tip=document.getElementById('tooltip'), rect=icon.getBoundingClientRect(); tip.textContent=icon.dataset.tip; tip.hidden=false; const width=210, left=Math.max(12,Math.min(rect.left+rect.width/2-width/2,innerWidth-width-12)); const top=Math.min(rect.bottom+9,innerHeight-70); tip.style.left=left+'px'; tip.style.top=top+'px'; });
+    document.addEventListener('pointerout', e => { if(e.target.closest('.info')) document.getElementById('tooltip').hidden=true; });
+    document.getElementById('datePicker').addEventListener('change', e=>{ const url=new URL(location.href); url.searchParams.set('date',e.target.value); location.href=url.toString(); });
+    document.getElementById('refreshQuotes').addEventListener('click', refreshRealtimeQuotes);
+  </script>
+</body>
+</html>
